@@ -21,12 +21,18 @@
     <ClInclude Include="Headers\CurrencyType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Headers\USD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Currency.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Sources\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\USD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

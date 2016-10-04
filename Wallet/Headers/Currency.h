@@ -5,25 +5,30 @@
 #include <iostream>
 #include <string>
 
-#include "./CurrencyType.h"
+#include "CurrencyType.h"
 
 using namespace std;
 
-template<typename CurrencyType>
+struct MonetaryValue {
+	int mainunit;
+	int subunit;
+};
+
 class Currency {
+protected:
+	MonetaryValue value;
+	void normalize();
+
 public:
-	const string name;
+	const CurrencyType type;
 	const int base;
 
-	Currency(string, int);
-private:
-	int mainunitValue;
-	int subunitValue;
-
-	struct value {
-		int mainunit;
-		int subunit;
-	};
+	Currency(CurrencyType, int);
+	virtual ~Currency();
+	
+	MonetaryValue getValue();
+	string getName();
+	string getSubunitName();
 };
 
 #endif

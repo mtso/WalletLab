@@ -3,7 +3,8 @@
 #define CURRENCYTYPE_H
 
 enum CurrencyType {
-	USD
+	USD,
+	EUR
 };
 
 #endif

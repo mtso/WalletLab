@@ -1,7 +1,16 @@
 
-#include "../Headers/CurrencyType.h"
-#include "../Headers/Currency.h"
+#ifndef USD_H
+#define USD_H
 
-class USD : public Currency<CurrencyType {
+#include <iostream>
 
+#include "CurrencyType.h"
+#include "Currency.h"
+
+class USD : public Currency {
+
+	USD(int, int);
+	~USD();
 };
+
+#endif
