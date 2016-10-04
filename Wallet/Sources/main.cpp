@@ -2,33 +2,43 @@
 #include <iostream>
 
 #include "../Headers/CurrencyType.h"
-#include "../Headers/Currency.h"
-#include "../Headers/CurrencyUSD.h"
+#include "../Headers/GBPCurrency.h"
+#include "../Headers/USDCurrency.h"
 
 using namespace std;
 
 int main() {
 
-	for (int i = USD; i < 5 && i <= EUR; i++)
+	for (int i = USD; i < 5 && i <= AUD; i++)
 	{
 		cout << i << endl;
 	}
-	
-	Currency *usd = new CurrencyUSD(20, 20);
+	USDCurrency usd1 = USDCurrency(20, 60);
+	GBPCurrency gbp = GBPCurrency(5, 5);
+	Currency broad = usd1;
 
-	cout << usd->getMainunitName() << endl;
-	cout << usd->base << endl;
+	Currency *usd = new USDCurrency(20, 20);
+
+	*usd += *usd;
+
+	broad = usd1 + usd1;
+	broad += usd1;
+
+	cout << broad.getValue().main << '.' << broad.getValue().subunit << endl;
+
+	broad += gbp;
+
+	cout << broad.getValue().main << '.' << broad.getValue().subunit << endl;
 
 	delete usd;
 
-	usd = new CurrencyUSD(30, 30);
 
-	cout << usd->getMainunitName() << endl;
-	cout << usd->base << endl;
-	cout << usd->getSubunitName() << endl;
+	Currency sub1 = USDCurrency(1, 1);
+	Currency sub2 = USDCurrency(0, 20);
 
-	delete usd;
+	sub1 -= sub2;
 
+	cout << sub1.getValue().main << '.' << sub1.getValue().subunit << endl;
 
 	system("pause");
 

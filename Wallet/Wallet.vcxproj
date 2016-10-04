@@ -66,12 +66,14 @@
   <ItemGroup>
     <ClInclude Include="Headers\Currency.h" />
     <ClInclude Include="Headers\CurrencyType.h" />
-    <ClInclude Include="Headers\CurrencyUSD.h" />
+    <ClInclude Include="Headers\GBPCurrency.h" />
+    <ClInclude Include="Headers\USDCurrency.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sources\Currency.cpp" />
+    <ClCompile Include="Sources\GBPCurrency.cpp" />
     <ClCompile Include="Sources\main.cpp" />
-    <ClCompile Include="Sources\CurrencyUSD.cpp" />
+    <ClCompile Include="Sources\USDCurrency.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

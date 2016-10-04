@@ -4,7 +4,10 @@
 
 enum CurrencyType {
 	USD,
-	EUR
+	GBP,
+	JPY,
+	CHF,
+	AUD
 };
 
 #endif

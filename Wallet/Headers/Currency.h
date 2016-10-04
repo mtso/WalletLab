@@ -9,28 +9,39 @@
 
 using namespace std;
 
-struct MonetaryValue {
-	int mainunit;
-	int subunit;
-};
-
 class Currency {
 protected:
+	struct MonetaryValue {
+		int main;
+		int subunit;
+	};
+
 	MonetaryValue value;
-	void normalize();
+
+	const int base;
+	const string name;
+	const string subunitName;
+
+	void normalize(const int &, int &, int &);
 
 public:
+	const CurrencyType type;
+
+	MonetaryValue getValue();
+
 	// Constructor and Deconstructor
-	Currency(CurrencyType, int);
+	Currency(CurrencyType, int, string, string);
 	virtual ~Currency();
 
-	const CurrencyType type;
-	const int base;
-	
-	MonetaryValue getValue() { return value; }
-	virtual string getMainunitName();
-	virtual string getSubunitName();
+	// Copy assignment constructor
+	Currency& operator= (const Currency&);
 
+	// Operator Overloads
+	Currency& operator+= (const Currency &);
+	Currency& operator-= (const Currency &);
 };
+
+Currency operator+ (Currency, const Currency&);
+
 
 #endif

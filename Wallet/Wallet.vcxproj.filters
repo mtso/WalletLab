@@ -21,7 +21,10 @@
     <ClInclude Include="Headers\CurrencyType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\CurrencyUSD.h">
+    <ClInclude Include="Headers\USDCurrency.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\GBPCurrency.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -32,7 +35,10 @@
     <ClCompile Include="Sources\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\CurrencyUSD.cpp">
+    <ClCompile Include="Sources\USDCurrency.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\GBPCurrency.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
