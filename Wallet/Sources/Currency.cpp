@@ -21,18 +21,3 @@ void Currency::normalize() {
 		value.subunit = value.subunit % base;
 	}
 }
-
-MonetaryValue Currency::getValue() {
-	return value;
-}
-
-string Currency::getName() {
-	switch (type) {
-	case USD:
-		return "Dollar";
-
-	default:
-		break;
-	}
-	return "";
-}

@@ -12,6 +12,10 @@ CurrencyUSD::~CurrencyUSD() {
 	std::cout << "Calling USD destructor\n";
 }
 
+string Currency::getMainunitName() {
+	return "dollars";
+}
+
 string Currency::getSubunitName() {
 	return "cents";
 }

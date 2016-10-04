@@ -20,15 +20,17 @@ protected:
 	void normalize();
 
 public:
-	const CurrencyType type;
-	const int base;
-
+	// Constructor and Deconstructor
 	Currency(CurrencyType, int);
 	virtual ~Currency();
+
+	const CurrencyType type;
+	const int base;
 	
 	MonetaryValue getValue() { return value; }
-	string getName();
+	virtual string getMainunitName();
 	virtual string getSubunitName();
+
 };
 
 #endif
