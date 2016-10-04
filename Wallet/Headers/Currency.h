@@ -26,9 +26,9 @@ public:
 	Currency(CurrencyType, int);
 	virtual ~Currency();
 	
-	MonetaryValue getValue();
+	MonetaryValue getValue() { return value; }
 	string getName();
-	string getSubunitName();
+	virtual string getSubunitName();
 };
 
 #endif

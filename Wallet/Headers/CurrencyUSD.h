@@ -7,10 +7,10 @@
 #include "CurrencyType.h"
 #include "Currency.h"
 
-class USD : public Currency {
-
-	USD(int, int);
-	~USD();
+class CurrencyUSD : public Currency {
+public:
+	CurrencyUSD(int, int);
+	~CurrencyUSD();
 };
 
 #endif
