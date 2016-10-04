@@ -26,7 +26,7 @@ int main() {
 	cout << usd->getMainunitName() << endl;
 	cout << usd->base << endl;
 	cout << usd->getSubunitName() << endl;
-	
+
 	delete usd;
 
 
