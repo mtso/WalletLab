@@ -1,5 +1,5 @@
 
-#include "../Headers/GBPCurrency.h";
+#include "GBPCurrency.h";
 
 GBPCurrency::GBPCurrency(int mainInput, int subInput)
 : Currency(GBP, 100, "pounds", "pence")

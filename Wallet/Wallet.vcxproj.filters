@@ -15,30 +15,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Headers\Currency.h">
+    <ClInclude Include="Currency.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\CurrencyType.h">
+    <ClInclude Include="CurrencyType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\USDCurrency.h">
+    <ClInclude Include="GBPCurrency.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\GBPCurrency.h">
+    <ClInclude Include="USDCurrency.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Accountable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sources\Currency.cpp">
+    <ClCompile Include="Currency.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\main.cpp">
+    <ClCompile Include="GBPCurrency.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\USDCurrency.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\GBPCurrency.cpp">
+    <ClCompile Include="USDCurrency.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Accountable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

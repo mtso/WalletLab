@@ -1,6 +1,6 @@
 
 
-#include "../Headers/Currency.h"
+#include "Currency.h"
 
 // Universal normalize method
 void Currency::normalize(const int &base, int &main, int &sub)

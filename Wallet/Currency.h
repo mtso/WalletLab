@@ -5,11 +5,12 @@
 #include <iostream>
 #include <string>
 
+#include "Accountable.h"
 #include "CurrencyType.h"
 
 using namespace std;
 
-class Currency {
+class Currency: Accountable {
 protected:
 	struct MonetaryValue {
 		int main;

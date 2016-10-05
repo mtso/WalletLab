@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-#include "../Headers/USDCurrency.h"
+#include "USDCurrency.h"
 
 USDCurrency::USDCurrency(int initialMainValue, int initialSubValue) 
 			: Currency(USD, 100, "dollars", "cents") 

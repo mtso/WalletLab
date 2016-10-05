@@ -1,9 +1,10 @@
 
 #include <iostream>
 
-#include "../Headers/CurrencyType.h"
-#include "../Headers/GBPCurrency.h"
-#include "../Headers/USDCurrency.h"
+//#include "CurrencyType.h"
+#include "GBPCurrency.h"
+#include "USDCurrency.h"
+#include "Accountable.h"
 
 using namespace std;
 
@@ -39,6 +40,11 @@ int main() {
 	sub1 -= sub2;
 
 	cout << sub1.getValue().main << '.' << sub1.getValue().subunit << endl;
+
+	Accountable acct = Accountable(100, 10, 10);
+
+	acct = acct + acct;
+	acct += acct;
 
 	system("pause");
 

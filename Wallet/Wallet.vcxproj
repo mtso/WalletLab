@@ -10,6 +10,20 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Accountable.h" />
+    <ClInclude Include="Currency.h" />
+    <ClInclude Include="CurrencyType.h" />
+    <ClInclude Include="GBPCurrency.h" />
+    <ClInclude Include="USDCurrency.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Accountable.cpp" />
+    <ClCompile Include="Currency.cpp" />
+    <ClCompile Include="GBPCurrency.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="USDCurrency.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{77887729-FA0E-4FDE-8D15-89C45636CF2B}</ProjectGuid>
     <RootNamespace>Wallet</RootNamespace>
@@ -63,18 +77,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="Headers\Currency.h" />
-    <ClInclude Include="Headers\CurrencyType.h" />
-    <ClInclude Include="Headers\GBPCurrency.h" />
-    <ClInclude Include="Headers\USDCurrency.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Sources\Currency.cpp" />
-    <ClCompile Include="Sources\GBPCurrency.cpp" />
-    <ClCompile Include="Sources\main.cpp" />
-    <ClCompile Include="Sources\USDCurrency.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
