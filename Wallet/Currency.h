@@ -10,7 +10,7 @@
 
 using namespace std;
 
-class Currency : Accountable {
+class Currency : public Accountable {
 protected:
 	const string name;
 	const string subunitName;
@@ -33,6 +33,9 @@ public:
 	friend istream& operator>> (istream&, Currency&);
 
 	int getSubunitValue() { return subunitValue; }
+	int getMainValue() { return mainValue; }
+
+	string getName() { return name; }
 };
 
 Currency operator+ (Currency, const Currency&);

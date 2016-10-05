@@ -49,22 +49,26 @@ Currency& Currency::operator+= (const Currency &right)
 	return *this;
 }
 //
-//Currency& Currency::operator-= (const Currency &rhs)
-//{
-//	if (type == rhs.type)
-//	{
-//		if (mainValue > rhs.mainValue
-//			|| (mainValue == rhs.mainValue 
-//				&& subunitValue >= rhs.subunitValue))
-//		{
-//			mainValue -= rhs.mainValue;
-//			subunitValue -= rhs.subunitValue;
-//
-//			normalize(base, mainValue, subunitValue);
-//			return *this;
-//		}
-//	}
-//}
+Currency& Currency::operator-= (const Currency &right)
+{
+	if (type != right.type) { throw Error(2); }
+
+	if (mainValue > right.mainValue
+		|| (mainValue == right.mainValue 
+			&& subunitValue >= right.subunitValue))
+	{
+		mainValue -= right.mainValue;
+		subunitValue -= right.subunitValue;
+
+		normalize(base, mainValue, subunitValue);
+		return *this;
+	}
+	else
+	{
+		throw Error(3, -1);
+	}
+
+}
 //
 //Currency operator+ (Currency lhs, const Currency &rhs)
 //{

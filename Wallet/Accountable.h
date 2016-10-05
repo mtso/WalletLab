@@ -24,6 +24,9 @@ public:
 		const string description;
 		Error(int code)
 			: code(code), description("ERROR: Attempted to operate on input from a different currency type.") { }
+		Error(int code, int flag)
+			: code(code), description( (flag < 0) ? "ERROR: Not enough value to subtract from" : "" ) { }
+
 	};
 
 	Accountable(CurrencyType, int, int, int);
@@ -36,6 +39,8 @@ public:
 	// Operator Overloads
 	virtual Accountable& operator+= (const Accountable&);
 	virtual Accountable& operator-= (const Accountable&);
+
+	CurrencyType getType() { return type; }
 };
 
 Accountable operator+ (Accountable, const Accountable&);
