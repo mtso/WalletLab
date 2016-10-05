@@ -1,13 +1,13 @@
 
 #include "Accountable.h"
 
-Accountable::Accountable(int base, int main, int sub) : base(base)
+Accountable::Accountable(CurrencyType type, int base, int main, int sub) : type(type), base(base)
 {
 	mainValue = main;
 	subunitValue = sub;
 }
 
-Accountable::Accountable(const Accountable &source) : base(source.base)
+Accountable::Accountable(const Accountable &source) : type(source.type), base(source.base)
 {
 	mainValue = source.mainValue;
 	subunitValue = source.subunitValue;
@@ -35,6 +35,9 @@ void Accountable::normalize(const int &base, int &main, int &sub)
 
 Accountable& Accountable::operator= (const Accountable &source)
 {
+	if (type != source.type) 
+		{ throw Error(0); }
+
 	mainValue = source.mainValue;
 	subunitValue = source.subunitValue;
 
@@ -44,23 +47,28 @@ Accountable& Accountable::operator= (const Accountable &source)
 
 // Operator Overloads
 
-Accountable& Accountable::operator+= (const Accountable &rhs)
+Accountable& Accountable::operator+= (const Accountable &right)
 {
-	mainValue += rhs.mainValue;
-	subunitValue += rhs.subunitValue;
+	if (type != right.type) 
+		{ throw Error(1); }
+
+	mainValue += right.mainValue;
+	subunitValue += right.subunitValue;
 
 	normalize(base, mainValue, subunitValue);
-	return *this;	
+	return *this;
 }
 
-Accountable& Accountable::operator-= (const Accountable &rhs)
+Accountable& Accountable::operator-= (const Accountable &right)
 {
+	if (type != right.type) 
+		{ throw Error(2); }
 
-	if (mainValue > rhs.mainValue ||
-		(mainValue == rhs.mainValue && subunitValue >= rhs.subunitValue))
+	if (mainValue > right.mainValue ||
+		(mainValue == right.mainValue && subunitValue >= right.subunitValue))
 	{
-		mainValue -= rhs.mainValue;
-		subunitValue -= rhs.subunitValue;
+		mainValue -= right.mainValue;
+		subunitValue -= right.subunitValue;
 
 		normalize(base, mainValue, subunitValue);
 		return *this;

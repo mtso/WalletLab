@@ -16,16 +16,10 @@ void Currency::normalize(const int &base, int &main, int &sub)
 	}
 }
 
-Currency::MonetaryValue Currency::getValue()
+Currency::Currency(CurrencyType type, int base, string name, string subName, int mainVal, int subVal)
+: name(name), subunitName(subName), Accountable(type, base, mainVal, subVal)
 {
-	return value;
-}
-
-Currency::Currency(CurrencyType type, int base, string name, string subName)
-: type(type), base(base), name(name), subunitName(subName), Accountable(base, 0, 0)
-{
-	value = { 0, 0 };
-	normalize(base, value.main, value.subunit);
+	normalize(base, mainValue, subunitValue);
 }
 
 Currency::~Currency()
@@ -33,49 +27,62 @@ Currency::~Currency()
 
 }
 
-Currency& Currency::operator= (const Currency &source)
+//Currency& Currency::operator= (const Currency &source)
+//{
+//	if (type == source.type)
+//	{
+//		mainValue = source.mainValue;
+//		subunitValue = source.subunitValue;
+//		return *this;
+//	}
+//}
+
+//// Operator Overloads
+//
+Currency& Currency::operator+= (const Currency &right)
 {
-	if (type == source.type)
-	{
-		value.main = source.value.main;
-		value.subunit = source.value.subunit;
-		return *this;
-	}
+	if (type != right.type) { throw Error(1); }
+	mainValue += right.mainValue;
+	subunitValue += right.subunitValue;
+
+	normalize(base, mainValue, subunitValue);
+	return *this;
+}
+//
+//Currency& Currency::operator-= (const Currency &rhs)
+//{
+//	if (type == rhs.type)
+//	{
+//		if (mainValue > rhs.mainValue
+//			|| (mainValue == rhs.mainValue 
+//				&& subunitValue >= rhs.subunitValue))
+//		{
+//			mainValue -= rhs.mainValue;
+//			subunitValue -= rhs.subunitValue;
+//
+//			normalize(base, mainValue, subunitValue);
+//			return *this;
+//		}
+//	}
+//}
+//
+//Currency operator+ (Currency lhs, const Currency &rhs)
+//{
+//	return lhs += rhs;
+//}
+
+ostream& operator<< (ostream &outstream, const Currency &source)
+{
+	outstream << source.mainValue << '.';
+	if (source.subunitValue < 10) { outstream << '0'; }
+	outstream << source.subunitValue;
+	return outstream;
 }
 
-// Operator Overloads
-
-Currency& Currency::operator+= (const Currency &rhs)
+istream& operator>> (istream &instream, Currency &source)
 {
-	if (type == rhs.type)
-	{
-		value.main += rhs.value.main;
-		value.subunit += rhs.value.subunit;
+	instream >> source.mainValue;
+	instream >> source.subunitValue;
 
-		normalize(base, value.main, value.subunit);
-		return *this;
-	}
+	return instream;
 }
-
-Currency& Currency::operator-= (const Currency &rhs)
-{
-	if (type == rhs.type)
-	{
-		if (value.main > rhs.value.main
-			|| (value.main == rhs.value.main 
-				&& value.subunit >= rhs.value.subunit))
-		{
-			value.main -= rhs.value.main;
-			value.subunit -= rhs.value.subunit;
-
-			normalize(base, value.main, value.subunit);
-			return *this;
-		}
-	}
-}
-
-Currency operator+ (Currency lhs, const Currency &rhs)
-{
-	return lhs += rhs;
-}
-

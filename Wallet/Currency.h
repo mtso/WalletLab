@@ -10,28 +10,16 @@
 
 using namespace std;
 
-class Currency: Accountable {
+class Currency : Accountable {
 protected:
-	struct MonetaryValue {
-		int main;
-		int subunit;
-	};
-
-	MonetaryValue value;
-
-	const int base;
 	const string name;
 	const string subunitName;
 
 	void normalize(const int &, int &, int &);
 
 public:
-	const CurrencyType type;
-
-	MonetaryValue getValue();
-
 	// Constructor and Deconstructor
-	Currency(CurrencyType, int, string, string);
+	Currency(CurrencyType, int, string, string, int, int);
 	virtual ~Currency();
 
 	// Copy assignment constructor
@@ -40,6 +28,11 @@ public:
 	// Operator Overloads
 	Currency& operator+= (const Currency &);
 	Currency& operator-= (const Currency &);
+
+	friend ostream& operator<< (ostream&, const Currency&);
+	friend istream& operator>> (istream&, Currency&);
+
+	int getSubunitValue() { return subunitValue; }
 };
 
 Currency operator+ (Currency, const Currency&);

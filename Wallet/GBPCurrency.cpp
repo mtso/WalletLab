@@ -1,10 +1,9 @@
 
 #include "GBPCurrency.h";
 
-GBPCurrency::GBPCurrency(int mainInput, int subInput)
-: Currency(GBP, 100, "pounds", "pence")
+GBPCurrency::GBPCurrency(int initMain, int initSub)
+	: Currency(GBP, 100, "pounds", "pence", initMain, initSub)
 {
-	value = { mainInput, subInput };
 }
 GBPCurrency::~GBPCurrency()
 {

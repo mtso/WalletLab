@@ -4,11 +4,10 @@
 
 #include "USDCurrency.h"
 
-USDCurrency::USDCurrency(int initialMainValue, int initialSubValue) 
-			: Currency(USD, 100, "dollars", "cents") 
+USDCurrency::USDCurrency(int initMain, int initSub) 
+	: Currency(USD, 100, "dollars", "cents", initMain, initSub) 
 {
-	
-	value = { initialMainValue, initialSubValue };
+
 }
 
 USDCurrency::~USDCurrency() {
