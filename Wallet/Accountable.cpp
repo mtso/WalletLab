@@ -7,6 +7,12 @@ Accountable::Accountable(int base, int main, int sub) : base(base)
 	subunitValue = sub;
 }
 
+Accountable::Accountable(const Accountable &source) : base(source.base)
+{
+	mainValue = source.mainValue;
+	subunitValue = source.subunitValue;
+}
+
 Accountable::~Accountable()
 {
 
@@ -29,7 +35,6 @@ void Accountable::normalize(const int &base, int &main, int &sub)
 
 Accountable& Accountable::operator= (const Accountable &source)
 {
-
 	mainValue = source.mainValue;
 	subunitValue = source.subunitValue;
 
@@ -41,13 +46,11 @@ Accountable& Accountable::operator= (const Accountable &source)
 
 Accountable& Accountable::operator+= (const Accountable &rhs)
 {
-
 	mainValue += rhs.mainValue;
 	subunitValue += rhs.subunitValue;
 
 	normalize(base, mainValue, subunitValue);
-	return *this;
-	
+	return *this;	
 }
 
 Accountable& Accountable::operator-= (const Accountable &rhs)
@@ -62,7 +65,10 @@ Accountable& Accountable::operator-= (const Accountable &rhs)
 		normalize(base, mainValue, subunitValue);
 		return *this;
 	}
-
+	else
+	{
+		return *this;
+	}
 }
 
 Accountable operator+ (Accountable left, const Accountable &right)

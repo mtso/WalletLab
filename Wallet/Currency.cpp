@@ -22,7 +22,7 @@ Currency::MonetaryValue Currency::getValue()
 }
 
 Currency::Currency(CurrencyType type, int base, string name, string subName)
-: type(type), base(base), name(name), subunitName(subName)
+: type(type), base(base), name(name), subunitName(subName), Accountable(base, 0, 0)
 {
 	value = { 0, 0 };
 	normalize(base, value.main, value.subunit);

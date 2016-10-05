@@ -13,6 +13,7 @@ protected:
 
 public:
 	Accountable(int, int, int);
+	Accountable(const Accountable &);
 	virtual ~Accountable();
 
 

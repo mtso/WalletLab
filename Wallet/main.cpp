@@ -43,6 +43,8 @@ int main() {
 
 	Accountable acct = Accountable(100, 10, 10);
 
+	Accountable acct2 = Accountable(acct);
+
 	acct = acct + acct;
 	acct += acct;
 
