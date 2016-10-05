@@ -31,6 +31,9 @@ public:
 	virtual string getMainunitName();
 	virtual string getSubunitName();
 
+	Currency operator- (Currency& right) {
+		
+	}
 };
 
 #endif
