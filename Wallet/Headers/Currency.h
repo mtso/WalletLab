@@ -36,15 +36,9 @@ public:
 	// Copy assignment constructor
 	Currency& operator= (const Currency&);
 
-<<<<<<< HEAD
-	Currency operator- (Currency& right) {
-		
-	}
-=======
 	// Operator Overloads
 	Currency& operator+= (const Currency &);
 	Currency& operator-= (const Currency &);
->>>>>>> 2acf373986cbe33a6f069b07cfa2b78afc127db3
 };
 
 Currency operator+ (Currency, const Currency&);
