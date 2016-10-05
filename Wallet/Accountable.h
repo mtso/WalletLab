@@ -21,10 +21,11 @@ public:
 	Accountable& operator= (const Accountable&);
 
 	// Operator Overloads
-	Accountable& operator+= (const Accountable &);
-	Accountable& operator-= (const Accountable &);
+	Accountable& operator+= (const Accountable&);
+	Accountable& operator-= (const Accountable&);
 };
 
 Accountable operator+ (Accountable, const Accountable&);
+Accountable operator- (Accountable, const Accountable&);
 
 #endif

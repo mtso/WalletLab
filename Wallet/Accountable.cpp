@@ -76,3 +76,9 @@ Accountable operator+ (Accountable left, const Accountable &right)
 	left += right;
 	return left;
 }
+
+Accountable operator- (Accountable left, const Accountable &right)
+{
+	left -= right;
+	return left;
+}
