@@ -3,14 +3,15 @@
 #define USD_H
 
 #include <iostream>
+#include <string>
 
 #include "CurrencyType.h"
 #include "Currency.h"
 
-class CurrencyUSD : public Currency {
+class USDCurrency : public Currency {
 public:
-	CurrencyUSD(int, int);
-	~CurrencyUSD();
+	USDCurrency(int, int);
+	~USDCurrency();
 };
 
 #endif
