@@ -27,15 +27,14 @@ Currency::~Currency()
 
 }
 
-//Currency& Currency::operator= (const Currency &source)
-//{
-//	if (type == source.type)
-//	{
-//		mainValue = source.mainValue;
-//		subunitValue = source.subunitValue;
-//		return *this;
-//	}
-//}
+Currency& Currency::operator= (const Currency &source)
+{
+	if (type != source.type) { throw Error(0); }
+	
+	mainValue = source.mainValue;
+	subunitValue = source.subunitValue;
+	return *this;
+}
 
 //// Operator Overloads
 //
@@ -53,9 +52,7 @@ Currency& Currency::operator-= (const Currency &right)
 {
 	if (type != right.type) { throw Error(2); }
 
-	if (mainValue > right.mainValue
-		|| (mainValue == right.mainValue 
-			&& subunitValue >= right.subunitValue))
+	if (mainValue > right.mainValue || (mainValue == right.mainValue && subunitValue >= right.subunitValue))
 	{
 		mainValue -= right.mainValue;
 		subunitValue -= right.subunitValue;

@@ -21,7 +21,7 @@ int Wallet::contains(CurrencyType type)
 {
 	for (int i = 0; i < MAX_WALLET_SIZE; i++)
 	{
-		if (currencies[i]->getType() == type)
+		if (currencies[i] != nullptr && currencies[i]->getType() == type)
 		{
 			return i;
 		}
@@ -113,9 +113,11 @@ bool Wallet::withdraw(CurrencyType type, int withdrawMain, int withdrawSub)
 		{
 		case USD:
 			*currencies[withdrawIndex] -= USDCurrency(withdrawMain, withdrawSub);
+			break;
 
 		case GBP:
 			*currencies[withdrawIndex] -= GBPCurrency(withdrawMain, withdrawSub);
+			break;
 
 		//case JPY:
 		//	*currencies[withdrawIndex] -= JPYCurrency(withdrawMain, withdrawSub);
@@ -138,6 +140,6 @@ void Wallet::printBalance(ostream &out)
 {
 	for (int i = 0; i < currencyCount; i++)
 	{
-		out << *currencies[i] << currencies[i]->getName();
+		out << *currencies[i] << currencies[i]->getName() << endl;
 	}
 }

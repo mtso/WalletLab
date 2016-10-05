@@ -21,14 +21,10 @@ int main() {
 	wallet.deposit(GBP, randomValue(), randomValue());
 	wallet.deposit(GBP, randomValue(), randomValue());
 
+	wallet.withdraw(USD, randomValue(), randomValue());
+
 	wallet.printBalance(cout);
 
-	for (int i = USD; i < 5 && i <= AUD; i++)
-	{
-		cout << i << endl;
-
-		cout << rand() % 100 << endl;
-	}
 	
 	system("pause");
 

@@ -7,6 +7,9 @@
 
 using namespace std;
 
+/* Struct Accountable "Description Text"
+ *
+ */
 struct Accountable
 {
 protected:
@@ -22,6 +25,8 @@ public:
 	{
 		const int code;
 		const string description;
+
+		// Error code 0: =, 1: +=, 2: -=
 		Error(int code)
 			: code(code), description("ERROR: Attempted to operate on input from a different currency type.") { }
 		Error(int code, int flag)
@@ -40,6 +45,7 @@ public:
 	virtual Accountable& operator+= (const Accountable&);
 	virtual Accountable& operator-= (const Accountable&);
 
+	// Returns this object's CurrencyType.
 	CurrencyType getType() { return type; }
 };
 
