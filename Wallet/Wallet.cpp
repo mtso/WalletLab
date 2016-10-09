@@ -15,13 +15,14 @@ Wallet::~Wallet()
 	{
 		delete currencies[i];
 	}
+	delete[] currencies;
 }
 
-int Wallet::contains(CurrencyType type)
+int Wallet::contains(CurrencyType type) const
 {
-	for (int i = 0; i < MAX_WALLET_SIZE; i++)
+	for (int i = 0; i < MAX_WALLET_SIZE && i < currencyCount; i++)
 	{
-		if (currencies[i] != nullptr && currencies[i]->getType() == type)
+		if (currencies[i] != nullptr && currencies[i]->type == type)
 		{
 			return i;
 		}
@@ -29,16 +30,16 @@ int Wallet::contains(CurrencyType type)
 	return -1;
 }
 
-void Wallet::add(Currency currency)
+void Wallet::add(const Currency &currency)
 {
-	int index = contains(currency.getType());
+	int index = contains(currency.type);
 	if (index >= 0)
 	{
 		*currencies[index] += currency;
 	}
 	else if (currencyCount < MAX_WALLET_SIZE)
 	{
-		switch (currency.getType())
+		switch (currency.type)
 		{
 		case USD:
 			currencies[currencyCount] = new USDCurrency(currency.getMainValue(), currency.getSubunitValue());
@@ -46,20 +47,15 @@ void Wallet::add(Currency currency)
 		case GBP:
 			currencies[currencyCount] = new GBPCurrency(currency.getMainValue(), currency.getSubunitValue());
 			break;
-		case JPY:
-			//currencies[currencyCount] = new JPYCurrency(deposit.getMainValue(), deposit.getSubunitValue());
-			break;
-		case CHF:
-			//currencies[currencyCount] = new USDCurrency(deposit.getMainValue(), deposit.getSubunitValue());
-			break;
-		case AUD:
-			//currencies[currencyCount] = new USDCurrency(deposit.getMainValue(), deposit.getSubunitValue());
-			break;
 		default:
 			break;
 		}
 
 		currencyCount++;
+	}
+	else
+	{
+		std::cout << "Wallet is full" << std::endl;
 	}
 }
 
@@ -73,15 +69,6 @@ void Wallet::deposit(CurrencyType type, int depositMain, int depositSub)
 	case GBP:
 		add(GBPCurrency(depositMain, depositSub));
 		break;
-	case JPY:
-		//currencies[currencyCount] = new JPYCurrency(deposit.getMainValue(), deposit.getSubunitValue());
-		break;
-	case CHF:
-		//currencies[currencyCount] = new USDCurrency(deposit.getMainValue(), deposit.getSubunitValue());
-		break;
-	case AUD:
-		//currencies[currencyCount] = new USDCurrency(deposit.getMainValue(), deposit.getSubunitValue());
-		break;
 	default:
 		break;
 	}
@@ -92,9 +79,13 @@ bool Wallet::remove(CurrencyType type)
 	int toRemoveIndex = contains(type);
 	if (toRemoveIndex >= 0)
 	{
-		Currency toRemove = *currencies[toRemoveIndex];
-		*currencies[toRemoveIndex] = *currencies[currencyCount];
-		delete currencies[currencyCount];
+		Currency *toRemove = currencies[toRemoveIndex];
+		// Swap the last element with the element that needs to be removed
+		currencies[toRemoveIndex] = currencies[currencyCount - 1];
+		currencies[currencyCount - 1] = toRemove;
+		// Delete the last element, which should be the element to be removed (after the swap)
+		delete currencies[currencyCount - 1];
+		currencies[currencyCount - 1] = nullptr;
 		currencyCount--;
 		return true;
 	}
@@ -104,7 +95,7 @@ bool Wallet::remove(CurrencyType type)
 	}
 }
 
-bool Wallet::withdraw(CurrencyType type, int withdrawMain, int withdrawSub)
+Currency Wallet::withdraw(CurrencyType type, int withdrawMain, int withdrawSub)
 {
 	int withdrawIndex = contains(type);
 	if (withdrawIndex >= 0)
@@ -113,30 +104,23 @@ bool Wallet::withdraw(CurrencyType type, int withdrawMain, int withdrawSub)
 		{
 		case USD:
 			*currencies[withdrawIndex] -= USDCurrency(withdrawMain, withdrawSub);
-			break;
+			return USDCurrency(withdrawMain, withdrawSub);
 
 		case GBP:
 			*currencies[withdrawIndex] -= GBPCurrency(withdrawMain, withdrawSub);
-			break;
+			return GBPCurrency(withdrawMain, withdrawSub);
 
-		//case JPY:
-		//	*currencies[withdrawIndex] -= JPYCurrency(withdrawMain, withdrawSub);
-		//case CHF:
-		//	*currencies[withdrawIndex] -= CHFCurrency(withdrawMain, withdrawSub);
-		//case AUD:
-		//	*currencies[withdrawIndex] -= AUDCurrency(withdrawMain, withdrawSub);
 		default:
-			break;
+			throw "no currency to withdraw of type " + type;
 		}
-		return true;
 	}
 	else
 	{
-		return false;
+		throw "no currency in wallet of type " + type;
 	}
 }
 
-void Wallet::printBalance(ostream &out)
+void Wallet::printBalanceTo(ostream &out) const
 {
 	for (int i = 0; i < currencyCount; i++)
 	{

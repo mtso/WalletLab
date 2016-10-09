@@ -37,8 +37,8 @@ public:
 	friend Accountable operator+ (const Accountable&, const Accountable&);
 	friend Accountable operator- (const Accountable&, const Accountable&);
 
-	int getMainValue() { return mainValue; }
-	int getSubunitValue() { return subunitValue; }
+	int getMainValue() const { return mainValue; }
+	int getSubunitValue() const { return subunitValue; }
 };
 
 #endif

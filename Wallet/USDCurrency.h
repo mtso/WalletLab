@@ -7,7 +7,6 @@
 class USDCurrency : public Currency {
 public:
 	USDCurrency(int, int);
-	~USDCurrency();
 };
 
 #endif

@@ -8,7 +8,6 @@ class GBPCurrency : public Currency
 {
 public:
 	GBPCurrency(int, int);
-	~GBPCurrency();
 };
 
 #endif

@@ -12,9 +12,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Accountable.h" />
+    <ClInclude Include="AccountableTest.h" />
     <ClInclude Include="Currency.h" />
     <ClInclude Include="CurrencyType.h" />
     <ClInclude Include="GBPCurrency.h" />
+    <ClInclude Include="Test.h" />
     <ClInclude Include="USDCurrency.h" />
     <ClInclude Include="Wallet.h" />
   </ItemGroup>

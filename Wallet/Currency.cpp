@@ -52,6 +52,6 @@ istream& operator>> (istream &instream, Currency &source)
 {
 	instream >> source.mainValue;
 	instream >> source.subunitValue;
-
+	source.normalized(source.base, source.mainValue, source.subunitValue);
 	return instream;
 }

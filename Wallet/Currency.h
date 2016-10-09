@@ -40,10 +40,9 @@ public:
 	friend ostream& operator<< (ostream&, const Currency&);
 	friend istream& operator>> (istream&, Currency&);
 
-	string getName() { return name; }
-};
+	string getName() const { return name; }
 
-//Currency operator+ (Currency, const Currency&);
-//Currency operator- (Currency, const Currency&);
+	bool isSameTypeAs(const Currency &source) const { return type == source.type; }
+};
 
 #endif

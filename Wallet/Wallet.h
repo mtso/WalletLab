@@ -4,35 +4,35 @@
 
 #include <iostream>
 
-//#include "Currency.h"
-
 #include "USDCurrency.h"
 #include "GBPCurrency.h"
-//#include "JPYCurrency.h"
-//#include "CHFCurrency.h"
-//#include "AUDCurrency.h"
 
+using namespace std;
 
 const int MAX_WALLET_SIZE = 5;
 
 class Wallet
 {
 private:
-	Currency *currencies[MAX_WALLET_SIZE]; // = { nullptr, nullptr, nullptr, nullptr, nullptr };
+	Currency *currencies[MAX_WALLET_SIZE];
 	int currencyCount = 0;
 
 public:
 	Wallet();
 	~Wallet();
 
-	int getCount() { return currencyCount; }
-	int contains(CurrencyType);
-	void add(Currency);
+	int getCount() const { return currencyCount; }
+	/*
+		Checks if the wallet currently contains money of a currency type.
+		Returns the index of the currency or the sentinel -1 if the wallet does not contain a currency of the passed-in type
+	*/
+	int contains(CurrencyType) const;
+	void add(const Currency&);
 	void deposit(CurrencyType, int, int);
 	bool remove(CurrencyType);
-	bool withdraw(CurrencyType, int, int);
-	bool isEmpty();
-	void printBalance(ostream&);
+	Currency withdraw(CurrencyType, int, int);
+	bool isEmpty() const;
+	void printBalanceTo(ostream&) const;
 };
 
 #endif

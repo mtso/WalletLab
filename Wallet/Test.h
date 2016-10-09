@@ -4,10 +4,22 @@
 
 #include <iostream>
 
-class Test
+using namespace std;
+
+namespace Test
 {
-	
-	void runTests();
+	template<typename T>
+	void check(T expectedValue, T actualValue, string filename, double lineNumber)
+	{
+		if (expectedValue == actualValue) 
+		{
+			cout << filename << "\\" << lineNumber << " Success" << endl;
+		}
+		else 
+		{
+			cout << filename << "\\" << lineNumber << " Failure" << endl;
+		}
+	}
 };
 
 #endif
