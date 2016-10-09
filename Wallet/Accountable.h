@@ -1,55 +1,39 @@
+/*
+ * Accountable
+ * Provides a base class for monetary accounting objects
+ * Must have a main value
+ * Must have a subunit value
+ * Must have a subunit base for calculating subunit overflows
+ */
+
 
 #ifndef ACCOUNTABLE_H
 #define ACCOUNTABLE_H
 
-#include <string>
-#include "CurrencyType.h"
-
-using namespace std;
-
-/* Struct Accountable "Description Text"
- *
- */
-struct Accountable
+class Accountable
 {
 protected:
-	const CurrencyType type;
 	const int base;
 	int mainValue;
 	int subunitValue;
 
-	void normalize(const int &, int &, int &);
+	// Explicitly passing in all inputs for clarity
+	Accountable& normalize(const int &, int &, int &);
 
 public:
-	struct Error 
-	{
-		const int code;
-		const string description;
-
-		// Error code 0: =, 1: +=, 2: -=
-		Error(int code)
-			: code(code), description("ERROR: Attempted to operate on input from a different currency type.") { }
-		Error(int code, int flag)
-			: code(code), description( (flag < 0) ? "ERROR: Not enough value to subtract from" : "" ) { }
-
-	};
-
-	Accountable(CurrencyType, int, int, int);
-	Accountable(const Accountable &);
-	virtual ~Accountable();
+	Accountable(const int, const int, const int);
+	Accountable(const Accountable&);
+	virtual ~Accountable() {}
 
 	// Copy assignment constructor
-	virtual Accountable& operator= (const Accountable&);
+	Accountable& operator= (const Accountable&);
 
 	// Operator Overloads
-	virtual Accountable& operator+= (const Accountable&);
-	virtual Accountable& operator-= (const Accountable&);
-
-	// Returns this object's CurrencyType.
-	CurrencyType getType() { return type; }
+	Accountable& operator+= (const Accountable&);
+	Accountable& operator-= (const Accountable&);
 };
 
-Accountable operator+ (Accountable, const Accountable&);
-Accountable operator- (Accountable, const Accountable&);
+Accountable operator+ (const Accountable&, const Accountable&);
+Accountable operator- (const Accountable&, const Accountable&);
 
 #endif
