@@ -14,7 +14,8 @@ Accountable::Accountable(const Accountable &source) : base(source.base)
 }
 
 // Universal normalize method
-Accountable& Accountable::normalize(const int &base, int &main, int &sub)
+
+Accountable& Accountable::normalized(const int &base, int &main, int &sub)
 {
 	if (sub >= base)
 	{
@@ -36,7 +37,7 @@ Accountable& Accountable::operator= (const Accountable &source)
 	mainValue = source.mainValue;
 	subunitValue = source.subunitValue;
 
-	return normalize(base, mainValue, subunitValue);
+	return normalized(base, mainValue, subunitValue);
 }
 
 // Operator Overloads
@@ -46,7 +47,7 @@ Accountable& Accountable::operator+= (const Accountable &right)
 	mainValue += right.mainValue;
 	subunitValue += right.subunitValue;
 
-	return normalize(base, mainValue, subunitValue);
+	return normalized(base, mainValue, subunitValue);
 }
 
 Accountable& Accountable::operator-= (const Accountable &right)
@@ -54,7 +55,7 @@ Accountable& Accountable::operator-= (const Accountable &right)
 	mainValue -= right.mainValue;
 	subunitValue -= right.subunitValue;
 
-	return normalize(base, mainValue, subunitValue);
+	return normalized(base, mainValue, subunitValue);
 }
 
 Accountable operator+ (Accountable left, const Accountable &right)

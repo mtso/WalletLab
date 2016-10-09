@@ -1,76 +1,44 @@
 
-
 #include "Currency.h"
 
-// Universal normalize method
-void Currency::normalize(const int &base, int &main, int &sub)
+Currency::Currency(CurrencyType type, int base, string mainName, string subName, int mainVal, int subVal)
+: name(mainName), subunitName(subName), type(type), Accountable(base, mainVal, subVal)
 {
-	if (sub >= base)
-	{
-		main += sub / base;
-		sub %= base;
-	}
-	else if (sub < 0) {
-		main--;
-		sub += base;
-	}
-}
-
-Currency::Currency(CurrencyType type, int base, string name, string subName, int mainVal, int subVal)
-: name(name), subunitName(subName), Accountable(type, base, mainVal, subVal)
-{
-	normalize(base, mainValue, subunitValue);
-}
-
-Currency::~Currency()
-{
-
+	normalized(base, mainValue, subunitValue);
 }
 
 Currency& Currency::operator= (const Currency &source)
 {
-	if (type != source.type) { throw Error(0); }
+	if (type != source.type) { throw "operator= fails on incompatible types"; }
 	
-	mainValue = source.mainValue;
-	subunitValue = source.subunitValue;
+	*this = source;
 	return *this;
 }
 
-//// Operator Overloads
-//
+// Operator Overloads
+
 Currency& Currency::operator+= (const Currency &right)
 {
-	if (type != right.type) { throw Error(1); }
-	mainValue += right.mainValue;
-	subunitValue += right.subunitValue;
-
-	normalize(base, mainValue, subunitValue);
+	if (type != right.type) { throw "operator+= fails on incompatible types"; }
+	
+	*this += right;
 	return *this;
 }
 //
 Currency& Currency::operator-= (const Currency &right)
 {
-	if (type != right.type) { throw Error(2); }
+	if (type != right.type) { throw "operator-= fails on incompatible types"; }
 
 	if (mainValue > right.mainValue || (mainValue == right.mainValue && subunitValue >= right.subunitValue))
 	{
-		mainValue -= right.mainValue;
-		subunitValue -= right.subunitValue;
-
-		normalize(base, mainValue, subunitValue);
+		*this -= right;
 		return *this;
 	}
 	else
 	{
-		throw Error(3, -1);
+		throw "Insufficient balance in currency type: " + type;
 	}
-
 }
-//
-//Currency operator+ (Currency lhs, const Currency &rhs)
-//{
-//	return lhs += rhs;
-//}
 
 ostream& operator<< (ostream &outstream, const Currency &source)
 {

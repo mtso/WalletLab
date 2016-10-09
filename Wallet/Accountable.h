@@ -17,11 +17,13 @@ protected:
 	int mainValue;
 	int subunitValue;
 
-	// Explicitly passing in all inputs for clarity
-	Accountable& normalize(const int &, int &, int &);
+	// Explicitly pass in all inputs for clarity
+	Accountable& normalized(const int &, int &, int &);
 
 public:
+	// Initialize with base, main, and subunit value
 	Accountable(const int, const int, const int);
+	// Copy constructor
 	Accountable(const Accountable&);
 	virtual ~Accountable() {}
 
@@ -31,9 +33,12 @@ public:
 	// Operator Overloads
 	Accountable& operator+= (const Accountable&);
 	Accountable& operator-= (const Accountable&);
-};
 
-Accountable operator+ (const Accountable&, const Accountable&);
-Accountable operator- (const Accountable&, const Accountable&);
+	friend Accountable operator+ (const Accountable&, const Accountable&);
+	friend Accountable operator- (const Accountable&, const Accountable&);
+
+	int getMainValue() { return mainValue; }
+	int getSubunitValue() { return subunitValue; }
+};
 
 #endif
