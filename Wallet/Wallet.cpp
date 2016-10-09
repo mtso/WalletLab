@@ -15,8 +15,9 @@ Wallet::~Wallet()
 	{
 		delete currencies[i];
 	}
-	delete[] currencies;
 }
+
+
 
 int Wallet::contains(CurrencyType type) const
 {
@@ -33,6 +34,7 @@ int Wallet::contains(CurrencyType type) const
 void Wallet::add(const Currency &currency)
 {
 	int index = contains(currency.type);
+	std::cout << index << std::endl;
 	if (index >= 0)
 	{
 		*currencies[index] += currency;
@@ -127,3 +129,5 @@ void Wallet::printBalanceTo(ostream &out) const
 		out << *currencies[i] << currencies[i]->getName() << endl;
 	}
 }
+
+/**/
