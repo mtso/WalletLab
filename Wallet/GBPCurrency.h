@@ -6,7 +6,8 @@
 class GBPCurrency : public Currency {
 private:
 	const int base = 100;
-	GBPCurrency& normalized(int& wholeValue, int& fractionalValue);
+	
+	virtual Currency& normalized(int& wholeValue, int& fractionalValue);
 
 public:
 	GBPCurrency(int initialWhole, int initialFractional);
@@ -15,8 +16,8 @@ public:
 
 	virtual GBPCurrency& operator= (const GBPCurrency& right);
 
-	virtual Accountable& operator+= (const Accountable& right);
-	virtual Accountable& operator-= (const Accountable& right);
+	//virtual Accountable& operator+= (const Accountable& right);
+	//virtual Accountable& operator-= (const Accountable& right);
 
 	friend GBPCurrency& operator+ (GBPCurrency& left, const GBPCurrency& right);
 	friend GBPCurrency& operator- (GBPCurrency& left, const GBPCurrency& right);

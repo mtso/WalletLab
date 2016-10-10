@@ -14,10 +14,9 @@ const int MAX_WALLET_SIZE = 5;
 class Wallet
 {
 private:
-	/*
 	Currency *currencies[MAX_WALLET_SIZE];
 	int currencyCount = 0;
-
+	/*
 public:
 	Wallet();
 	~Wallet();

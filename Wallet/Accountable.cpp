@@ -18,6 +18,20 @@ Accountable& Accountable::operator= (const Accountable& right)
 	return *this;
 }
 
+Accountable& Accountable::operator+= (const Accountable& right)
+{
+	wholeValue += right.getWholeValue();
+	fractionalValue += right.getFractionalValue();
+	return *this;
+}
+
+Accountable& Accountable::operator-= (const Accountable& right)
+{
+	wholeValue -= right.getWholeValue();
+	fractionalValue -= right.getFractionalValue();
+	return *this;
+}
+
 bool Accountable::operator> (const Accountable& right)
 {
 	if (wholeValue > right.getWholeValue())

@@ -1,6 +1,5 @@
 
 #include <iostream>
-#include <cstdlib>
 
 #include "Wallet.h"
 
@@ -13,9 +12,19 @@ int randomValue()
 
 int main() 
 {
-	Currency *usd = new USDCurrency(10, 10);
+	Currency *usd = new USDCurrency(10, 60);
 	GBPCurrency gbp(5, 5);
-	*usd += gbp;
+	USDCurrency usd2(6, 65);
+
+	cout << gbp.getWholeValue() << endl;
+	try
+	{
+		*usd += usd2;
+	}
+	catch (char* error)
+	{
+		cout << error << endl;
+	}
 
 	cout << usd->getWholeValue() << endl;
 	cout << usd->getFractionalValue() << endl;
