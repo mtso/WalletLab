@@ -1,6 +1,6 @@
 
-#ifndef USD_H
-#define USD_H
+#ifndef USDCURRENCY_H
+#define USDCURRENCY_H
 
 #include "Currency.h"
 
@@ -15,10 +15,14 @@ public:
 	~USDCurrency() {}
 
 	virtual USDCurrency& operator= (const USDCurrency& right);
-	virtual USDCurrency& operator+= (const USDCurrency& right);
-	virtual USDCurrency& operator-= (const USDCurrency& right);
 
+	virtual Accountable& operator+= (const Accountable& right);
+	virtual Accountable& operator-= (const Accountable& right);
+	
 	friend USDCurrency& operator+ (USDCurrency& left, const USDCurrency& right);
+	friend USDCurrency& operator- (USDCurrency& left, const USDCurrency& right);
+
+
 };
 
 #endif

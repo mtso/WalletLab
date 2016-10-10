@@ -13,4 +13,5 @@ Currency::Currency(const Currency& source) : Accountable(source)
 Currency& Currency::operator= (const Currency& right)
 {
 	Accountable::operator= (right);
+	return *this;
 }

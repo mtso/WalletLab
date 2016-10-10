@@ -4,8 +4,6 @@
 
 #include "Wallet.h"
 
-#include "AccountableTest.h"
-
 using namespace std;
 
 int randomValue()
@@ -15,16 +13,14 @@ int randomValue()
 
 int main() 
 {
-	AccountableTest::runAccountableTests();
+	Currency *usd = new USDCurrency(10, 10);
+	GBPCurrency gbp(5, 5);
+	*usd += gbp;
 
-	Wallet wallet = Wallet();
-	
-	wallet.deposit(USD, randomValue(), randomValue());
-	wallet.deposit(USD, randomValue(), randomValue());
-	wallet.deposit(USD, randomValue(), randomValue());
-	wallet.withdraw(USD, randomValue(), randomValue());
-
-	wallet.printBalanceTo(cout);
+	cout << usd->getWholeValue() << endl;
+	cout << usd->getFractionalValue() << endl;
+	cout << usd->getWholeName() << endl;
+	cout << usd->getFractionalName() << endl;
 
 	system("pause");
 	return 0;

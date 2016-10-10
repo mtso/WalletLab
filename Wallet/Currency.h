@@ -29,7 +29,10 @@ public:
 	virtual ~Currency() {}
 
 	// Copy assignment constructor
-	virtual Currency& operator= (const Currency& source);
+	virtual Currency& operator= (const Currency& right);
+
+	//virtual Accountable& operator+= (const Currency& right);
+	//virtual Currency& operator-= (const Currency& right);
 
 	friend ostream& operator<< (ostream& outStream, const Currency& right);
 	friend istream& operator>> (istream& inStream, Currency& right);

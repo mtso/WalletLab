@@ -1,7 +1,4 @@
 
-#include <iostream>
-#include <string>
-
 #include "USDCurrency.h"
 
 USDCurrency& USDCurrency::normalized(int& wholeValue, int& fractionalValue)
@@ -16,6 +13,7 @@ USDCurrency& USDCurrency::normalized(int& wholeValue, int& fractionalValue)
 		wholeValue -= fractionalValue / base - 1;
 		fractionalValue = fractionalValue % base + base;
 	}
+	return *this;
 }
 
 USDCurrency::USDCurrency(int initialWhole, int initialFractional) 
@@ -31,24 +29,38 @@ USDCurrency::USDCurrency(const USDCurrency& source) : Currency(source)
 USDCurrency& USDCurrency::operator= (const USDCurrency& right)
 {
 	Currency::operator= (right);
+	return *this;
 }
 
-USDCurrency& USDCurrency::operator+= (const USDCurrency& right)
+Accountable& USDCurrency::operator+= (const Accountable& right)
 {
 	wholeValue += right.getWholeValue();
 	fractionalValue += right.getFractionalValue();
 	return normalized(wholeValue, fractionalValue);
 }
 
-USDCurrency& USDCurrency::operator-= (const USDCurrency& right)
+Accountable& USDCurrency::operator-= (const Accountable& right)
 {
-	wholeValue -= right.getWholeValue();
-	fractionalValue -= right.getFractionalValue();
-	return normalized(wholeValue, fractionalValue);
+	if (*this > right)
+	{
+		wholeValue -= right.getWholeValue();
+		fractionalValue -= right.getFractionalValue();
+		return normalized(wholeValue, fractionalValue);
+	}
+	else
+	{
+		throw "Subtraction operation attempt on an insufficient balance";
+	}
 }
 
-friend USDCurrency& USDCurrency::operator+ (USDCurrency& left, const USDCurrency& right)
+USDCurrency& operator+ (USDCurrency& left, const USDCurrency& right)
 {
 	left += right;
+	return left;
+}
+
+USDCurrency& operator- (USDCurrency& left, const USDCurrency& right)
+{
+	left -= right;
 	return left;
 }
