@@ -5,6 +5,10 @@
 #include "Currency.h"
 
 class USDCurrency : public Currency {
+private:
+	const int base = 100;
+	USDCurrency& normalized(int& wholeValue, int& fractionalValue);
+
 public:
 	USDCurrency(int initialWhole, int initialFractional);
 	USDCurrency(const USDCurrency& source);
@@ -14,7 +18,7 @@ public:
 	virtual USDCurrency& operator+= (const USDCurrency& right);
 	virtual USDCurrency& operator-= (const USDCurrency& right);
 
-
+	friend USDCurrency& operator+ (USDCurrency& left, const USDCurrency& right);
 };
 
 #endif
