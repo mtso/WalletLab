@@ -63,3 +63,15 @@ bool Accountable::operator< (const Accountable& right)
 		return false;
 	}
 }
+
+bool Accountable::operator== (const Accountable& right)
+{
+	if (wholeValue == right.getWholeValue() && fractionalValue == right.getFractionalValue())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}

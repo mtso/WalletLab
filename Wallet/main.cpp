@@ -12,24 +12,14 @@ int randomValue()
 
 int main() 
 {
-	Currency *usd = new USDCurrency(10, 60);
-	GBPCurrency gbp(5, 5);
-	USDCurrency usd2(6, 65);
+	Wallet wallet = Wallet();
 
-	cout << gbp.getWholeValue() << endl;
-	try
-	{
-		*usd += usd2;
-	}
-	catch (char* error)
-	{
-		cout << error << endl;
-	}
+	cout << wallet.getCount() << endl;
+	cout << wallet.contains(USD) << endl;
 
-	cout << usd->getWholeValue() << endl;
-	cout << usd->getFractionalValue() << endl;
-	cout << usd->getWholeName() << endl;
-	cout << usd->getFractionalName() << endl;
+	wallet.deposit(*(new USDCurrency(10, 10)));
+
+	cout << wallet.contains(USD) << endl;
 
 	system("pause");
 	return 0;

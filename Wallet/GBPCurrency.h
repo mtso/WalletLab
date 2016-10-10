@@ -10,6 +10,7 @@ private:
 	virtual Currency& normalized(int& wholeValue, int& fractionalValue);
 
 public:
+	GBPCurrency();
 	GBPCurrency(int initialWhole, int initialFractional);
 	GBPCurrency(const GBPCurrency& source);
 	~GBPCurrency() {}

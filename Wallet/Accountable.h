@@ -37,6 +37,7 @@ public:
 
 	virtual bool operator> (const Accountable& right);
 	virtual bool operator< (const Accountable& right);
+	virtual bool operator== (const Accountable& right);
 
 	virtual int getWholeValue() const { return wholeValue; }
 	virtual int getFractionalValue() const { return fractionalValue; }

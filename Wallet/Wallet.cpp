@@ -1,6 +1,6 @@
 
 #include "Wallet.h"
-/*
+
 Wallet::Wallet()
 {
 	for (int i = 0; i < MAX_WALLET_SIZE; i++)
@@ -13,69 +13,34 @@ Wallet::~Wallet()
 {
 	for (int i = 0; i < MAX_WALLET_SIZE; i++)
 	{
-		delete currencies[i];
+		if (currencies[i] != nullptr)
+		{
+			delete currencies[i];
+		}
 	}
 }
 
-
-
-int Wallet::contains(CurrencyType type) const
+bool Wallet::contains(CurrencyType type) const
 {
-	for (int i = 0; i < MAX_WALLET_SIZE && i < currencyCount; i++)
-	{
-		if (currencies[i] != nullptr && currencies[i]->type == type)
-		{
-			return i;
-		}
-	}
-	return -1;
+	return currencies[type] != nullptr;
 }
 
-void Wallet::add(const Currency &currency)
-{
-	int index = contains(currency.type);
-	std::cout << index << std::endl;
-	if (index >= 0)
-	{
-		*currencies[index] += currency;
-	}
-	else if (currencyCount < MAX_WALLET_SIZE)
-	{
-		switch (currency.type)
-		{
-		case USD:
-			currencies[currencyCount] = new USDCurrency(currency.getMainValue(), currency.getSubunitValue());
-			break;
-		case GBP:
-			currencies[currencyCount] = new GBPCurrency(currency.getMainValue(), currency.getSubunitValue());
-			break;
-		default:
-			break;
-		}
 
-		currencyCount++;
+void Wallet::deposit(Currency& deposit)
+{
+	if (contains(deposit.getType()))
+	{
+		*currencies[deposit.getType()] += deposit;
 	}
 	else
 	{
-		std::cout << "Wallet is full" << std::endl;
+		// TODO: need to fix this, depositing should create a new object;
+		// but it doesn't
+		Currency *newCurrency = new Currency(&deposit);
+		currencies[deposit.getType()] = &deposit;
 	}
 }
-
-void Wallet::deposit(CurrencyType type, int depositMain, int depositSub)
-{
-	switch (type)
-	{
-	case USD:
-		add(USDCurrency(depositMain, depositSub));
-		break;
-	case GBP:
-		add(GBPCurrency(depositMain, depositSub));
-		break;
-	default:
-		break;
-	}
-}
-
+/*
 bool Wallet::remove(CurrencyType type)
 {
 	int toRemoveIndex = contains(type);

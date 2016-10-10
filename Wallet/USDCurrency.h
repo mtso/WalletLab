@@ -14,7 +14,7 @@ public:
 	USDCurrency();
 	USDCurrency(int initialWhole, int initialFractional);
 	USDCurrency(const USDCurrency& source);
-	~USDCurrency() {}
+	~USDCurrency() { std::cout << "USD destructor" << std::endl; }
 
 	virtual USDCurrency& operator= (const USDCurrency& right);
 

@@ -21,7 +21,7 @@ USDCurrency::USDCurrency() : Currency(USD, "dollars", "cents", 0, 0)
 }
 
 USDCurrency::USDCurrency(int initialWhole, int initialFractional) 
-: Currency(USD, "dollars", "cents", initialWhole, initialWhole)
+: Currency(USD, "dollars", "cents", initialWhole, initialFractional)
 {
 	normalized(wholeValue, fractionalValue);
 }

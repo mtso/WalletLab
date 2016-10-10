@@ -16,8 +16,11 @@ Currency& GBPCurrency::normalized(int& wholeValue, int& fractionalValue)
 	return *this;
 }
 
+GBPCurrency::GBPCurrency() : Currency(GBP, "pounds", "pence", 0, 0)
+{}
+
 GBPCurrency::GBPCurrency(int initialWhole, int initialFractional)
-: Currency(GBP, "dollars", "cents", initialWhole, initialWhole)
+: Currency(GBP, "dollars", "cents", initialWhole, initialFractional)
 {
 	normalized(wholeValue, fractionalValue);
 }

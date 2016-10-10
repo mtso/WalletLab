@@ -16,19 +16,20 @@ class Wallet
 private:
 	Currency *currencies[MAX_WALLET_SIZE];
 	int currencyCount = 0;
-	/*
+	
 public:
 	Wallet();
 	~Wallet();
 
-	
 	int getCount() const { return currencyCount; }
 	
 	// Checks if the wallet currently contains money of a currency type.
 	// Returns the index of the currency or the sentinel -1 if the wallet does not contain a currency of the passed-in type
-	int contains(CurrencyType) const;
-	void add(const Currency&);
-	void deposit(CurrencyType, int, int);
+	bool contains(CurrencyType) const;
+
+	void deposit(Currency& deposit);
+
+	/*
 	bool remove(CurrencyType);
 	Currency withdraw(CurrencyType, int, int);
 	bool isEmpty() const;
