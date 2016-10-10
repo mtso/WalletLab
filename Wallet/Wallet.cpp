@@ -1,6 +1,6 @@
 
 #include "Wallet.h"
-
+/*
 Wallet::Wallet()
 {
 	for (int i = 0; i < MAX_WALLET_SIZE; i++)

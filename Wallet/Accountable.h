@@ -13,32 +13,30 @@
 class Accountable
 {
 protected:
-	const int base;
-	int mainValue;
-	int subunitValue;
+	int wholeValue;
+	int fractionalValue;
 
-	// Explicitly pass in all inputs for clarity
-	Accountable& normalized(const int &, int &, int &);
+	// Increments whole value if fractional overflowed or 
+	// decrements whole value if fractional underflowed;
+	// then returns self object
+	// virtual Accountable& normalized(const int &, int &, int &);
 
 public:
 	// Initialize with base, main, and subunit value
-	Accountable(const int, const int, const int);
+	Accountable(const int initialWhole, const int initialFractional);
 	// Copy constructor
-	Accountable(const Accountable&);
+	Accountable(const Accountable& source);
 	virtual ~Accountable() {}
 
 	// Copy assignment constructor
-	Accountable& operator= (const Accountable&);
+	virtual Accountable& operator= (const Accountable&);
 
 	// Operator Overloads
-	Accountable& operator+= (const Accountable&);
-	Accountable& operator-= (const Accountable&);
+	virtual Accountable& operator+= (const Accountable& right) = 0;
+	virtual Accountable& operator-= (const Accountable& right) = 0;
 
-	friend Accountable operator+ (const Accountable&, const Accountable&);
-	friend Accountable operator- (const Accountable&, const Accountable&);
-
-	int getMainValue() const { return mainValue; }
-	int getSubunitValue() const { return subunitValue; }
+	virtual int getWholeValue() const { return wholeValue; }
+	virtual int getFractionalValue() const { return fractionalValue; }
 };
 
 #endif

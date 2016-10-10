@@ -12,37 +12,30 @@ using namespace std;
 
 class Currency : public Accountable {
 protected:
-	const string name;
-	const string subunitName;
+	const string wholeName;
+	const string fractionalName;
 
 public:
-	const CurrencyType type;
 	/*
 	  Constructor
 	  Parameters:
-	  * Currency type
-	  * base
-	  * string main unit's name
-	  * string subunit name
-	  * int main unit's value
-	  * int subunit's value
-	  */
-	Currency(CurrencyType, int, string, string, int, int);
+	  - string main unit's name
+	  - string subunit name
+	  - int main unit's value
+	  - int subunit's value
+	 */
+	Currency(string wholeName, string fractionalName, int initialWhole, int initialFractional);
+	Currency(const Currency& source);
 	virtual ~Currency() {}
 
 	// Copy assignment constructor
-	Currency& operator= (const Currency&);
+	virtual Currency& operator= (const Currency& source);
 
-	// Operator Overloads
-	Currency& operator+= (const Currency&);
-	Currency& operator-= (const Currency&);
+	friend ostream& operator<< (ostream& outStream, const Currency& right);
+	friend istream& operator>> (istream& inStream, Currency& right);
 
-	friend ostream& operator<< (ostream&, const Currency&);
-	friend istream& operator>> (istream&, Currency&);
-
-	string getName() const { return name; }
-
-	bool isSameTypeAs(const Currency &source) const { return type == source.type; }
+	virtual string getWholeName() const { return wholeName; }
+	virtual string getFractionalName() const { return fractionalName; }
 };
 
 #endif

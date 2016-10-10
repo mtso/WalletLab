@@ -1,71 +1,13 @@
 
 #include "Accountable.h"
 
-Accountable::Accountable(const int base, const int main, const int sub) : base(base)
+Accountable::Accountable(const int wholeInput, const int fractionalInput)
 {
-	mainValue = main;
-	subunitValue = sub;
+	wholeValue = wholeInput;
+	fractionalValue = fractionalInput;
 }
 
-Accountable::Accountable(const Accountable &source) : base(source.base)
+Accountable::Accountable(const Accountable &source)
 {
-	mainValue = source.mainValue;
-	subunitValue = source.subunitValue;
-}
-
-// Universal normalize method
-
-Accountable& Accountable::normalized(const int &base, int &main, int &sub)
-{
-	if (sub >= base)
-	{
-		main += sub / base;
-		sub %= base;
-	}
-	else if (sub < 0) 
-	{
-		main--;
-		sub += base;
-	}
-	return *this;
-}
-
-// Copy assignment
-
-Accountable& Accountable::operator= (const Accountable &source)
-{
-	mainValue = source.mainValue;
-	subunitValue = source.subunitValue;
-
-	return normalized(base, mainValue, subunitValue);
-}
-
-// Operator Overloads
-
-Accountable& Accountable::operator+= (const Accountable &right)
-{
-	mainValue += right.mainValue;
-	subunitValue += right.subunitValue;
-
-	return normalized(base, mainValue, subunitValue);
-}
-
-Accountable& Accountable::operator-= (const Accountable &right)
-{
-	mainValue -= right.mainValue;
-	subunitValue -= right.subunitValue;
-
-	return normalized(base, mainValue, subunitValue);
-}
-
-Accountable operator+ (Accountable left, const Accountable &right)
-{
-	left += right;
-	return left;
-}
-
-Accountable operator- (Accountable left, const Accountable &right)
-{
-	left -= right;
-	return left;
+	*this = source;
 }
