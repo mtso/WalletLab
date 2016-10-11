@@ -85,6 +85,18 @@ Currency& Wallet::withdraw(Currency& withdrawal)
 	return withdrawal -= withdrawal;
 }
 
+bool Wallet::isEmpty() const
+{
+	for (int i = 0; i < MAX_WALLET_SIZE; i++)
+	{
+		if (currency[i] != nullptr)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 void Wallet::printBalanceTo(std::ostream &outStream)
 {
 	for (int i = 0; i < MAX_WALLET_SIZE; i++)

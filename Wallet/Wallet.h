@@ -47,10 +47,15 @@ public:
 
 	/**
 	 * Withdraws a currency
+	 * @returns the withdrawal amount if successful or 
+	 * a zero-value withdrawal object if there was an insufficient balance
 	 */
 	Currency& withdraw(Currency& withdrawal);
 
-	/*
+	/**
+	 * Checks if the wallet contains currency objects or not.
+	 * @returns true if the whole array points to nullptr
+	 */
 	bool isEmpty() const;
 
 	/**/

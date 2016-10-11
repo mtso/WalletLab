@@ -31,7 +31,7 @@ int main()
 	//wallet.remove(USD);
 	//wallet.remove(GBP);
 
-	wallet.withdraw(USDCurrency(10, 10));
+	//wallet.withdraw(USDCurrency(10, 10));
 	cout << wallet.withdraw(USDCurrency(11, 10)).getWholeValue() << endl;
 
 	cout << wallet.contains(USD) << endl;

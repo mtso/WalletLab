@@ -10,6 +10,10 @@
 #ifndef ACCOUNTABLE_H
 #define ACCOUNTABLE_H
 
+/**
+ * Accountable is an interface that requires an object to store monetary values
+ * so that accounting operations can be performed on it.
+ */
 class Accountable
 {
 protected:
@@ -19,7 +23,7 @@ protected:
 	// Increments whole value if fractional overflowed or 
 	// decrements whole value if fractional underflowed;
 	// then returns self object
-	// virtual Accountable& normalized(const int &, int &, int &);
+	// virtual Accountable& normalized(const int &, int &, int &) = 0;
 
 public:
 	// Initialize with base, main, and subunit value

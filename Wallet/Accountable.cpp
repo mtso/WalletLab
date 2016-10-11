@@ -7,9 +7,8 @@ Accountable::Accountable(const int wholeInput, const int fractionalInput)
 	fractionalValue = fractionalInput;
 }
 
-Accountable::Accountable(const Accountable &source)
+Accountable::Accountable(const Accountable &source) : wholeValue(source.getWholeValue()), fractionalValue(source.getFractionalValue())
 {
-	*this = source;
 }
 
 Accountable& Accountable::operator= (const Accountable& right)
