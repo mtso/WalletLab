@@ -23,7 +23,7 @@ protected:
 	// Increments whole value if fractional overflowed or 
 	// decrements whole value if fractional underflowed;
 	// then returns self object
-	// virtual Accountable& normalized(const int &, int &, int &) = 0;
+	virtual Accountable& normalized(const int &, int &, int &) = 0;
 
 public:
 	// Initialize with base, main, and subunit value

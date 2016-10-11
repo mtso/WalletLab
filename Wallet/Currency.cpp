@@ -17,11 +17,15 @@ Currency::Currency(const Currency& source) : type(source.getType()), Accountable
 
 Currency& Currency::operator= (const Currency& right) 
 {
-	if (type != right.getType()) { throw "operator+= attempt on incompatible types"; }
+	if (type != right.getType()) { throw "operator= attempt on incompatible types"; }
 
 	if (this != &right)
 	{
 		Accountable::operator= (right);
+
+		wholeName = right.getWholeName();
+		fractionalName = right.getFractionalName();
+		type = right.getType();
 	}
 	return *this;
 }

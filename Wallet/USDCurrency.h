@@ -6,7 +6,7 @@
 
 class USDCurrency : public Currency {
 private:
-	const int base = 100;
+	const Base base = base100;
 
 	virtual Currency& normalized(int& wholeValue, int& fractionalValue);
 

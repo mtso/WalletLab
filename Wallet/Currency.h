@@ -12,9 +12,9 @@ using namespace std;
 
 class Currency : public Accountable {
 protected:
-	const string wholeName;
-	const string fractionalName;
-	const CurrencyType type;
+	string wholeName;
+	string fractionalName;
+	CurrencyType type;
 
 	virtual Currency& normalized(int& wholeValue, int& fractionalValue);
 

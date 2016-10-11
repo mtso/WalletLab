@@ -15,8 +15,9 @@ Accountable& Accountable::operator= (const Accountable& right)
 {
 	if (this != &right)
 	{
-		wholeValue = right.getWholeValue();
-		fractionalValue = right.getFractionalValue();
+		return Accountable(right);
+		//wholeValue = right.getWholeValue();
+		//fractionalValue = right.getFractionalValue();
 	}
 	return *this;
 }
