@@ -9,31 +9,55 @@
 
 using namespace std;
 
-const int MAX_WALLET_SIZE = 5;
+const int MAX_WALLET_SIZE = AUD + 1;
 
 class Wallet
 {
 private:
-	Currency *currencies[MAX_WALLET_SIZE];
-	int currencyCount = 0;
+	Currency *currency[MAX_WALLET_SIZE];
 	
 public:
+	/**
+	 * The wallet's constructor allocates memory for the array of Currency pointers.
+	 */
 	Wallet();
-	~Wallet();
-
-	int getCount() const { return currencyCount; }
 	
-	// Checks if the wallet currently contains money of a currency type.
-	// Returns the index of the currency or the sentinel -1 if the wallet does not contain a currency of the passed-in type
-	bool contains(CurrencyType) const;
+	/**
+	 * Wallet's destructor deletes each object that the array of pointers point to.
+	 */
+	~Wallet();
+	
+	/** 
+	 * Checks if the wallet currently contains money of a currency type.
+	 * @returns boolean
+	 */
+	bool contains(CurrencyType toRemove) const;
 
-	void deposit(Currency& deposit);
+	/** 
+	 * Adds a currency value into the wallet or creates a new currency object if one does not exist.
+	 * @param deposit The Currency object to deposit.
+	 */
+	bool deposit(const Currency& deposit);
+
+	/**
+	 * Removes a currency of a certain type
+	 * @param toRemove The CurrencyType to remove
+	 */
+	bool remove(CurrencyType toRemove);
+
+	/**
+	 * Withdraws a currency
+	 */
+	Currency& withdraw(const Currency& withdrawal);
 
 	/*
-	bool remove(CurrencyType);
-	Currency withdraw(CurrencyType, int, int);
 	bool isEmpty() const;
-	void printBalanceTo(ostream&) const;
+
+	/**/
+
+	void printBalanceTo(std::ostream& out);
+	
+	//friend ostream& operator<< (ostream& outStream, const Wallet& wallet);
 
 	/**/
 };

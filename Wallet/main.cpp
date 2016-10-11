@@ -10,16 +10,28 @@ int randomValue()
 	return rand() % 100;
 }
 
+CurrencyType randomType()
+{
+	int type = rand() % (AUD + 1);
+	return static_cast<CurrencyType>(type);
+}
+
 int main() 
 {
 	Wallet wallet = Wallet();
 
-	cout << wallet.getCount() << endl;
 	cout << wallet.contains(USD) << endl;
 
-	wallet.deposit(*(new USDCurrency(10, 10)));
+	wallet.deposit(USDCurrency(10, 10));
+	wallet.deposit(GBPCurrency(10, 10));
+
+	wallet.printBalanceTo(cout);
+
+	wallet.remove(USD);
+	wallet.remove(GBP);
 
 	cout << wallet.contains(USD) << endl;
+	cout << wallet.contains(GBP) << endl;
 
 	system("pause");
 	return 0;

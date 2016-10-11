@@ -5,7 +5,7 @@ Wallet::Wallet()
 {
 	for (int i = 0; i < MAX_WALLET_SIZE; i++)
 	{
-		currencies[i] = nullptr;
+		currency[i] = nullptr;
 	}
 }
 
@@ -13,47 +13,48 @@ Wallet::~Wallet()
 {
 	for (int i = 0; i < MAX_WALLET_SIZE; i++)
 	{
-		if (currencies[i] != nullptr)
+		delete currency[i];
+		//currency[i] = nullptr;
+	}
+	//delete[] currency;
+}
+
+bool Wallet::contains(CurrencyType ofType) const
+{
+	return currency[ofType] != nullptr;
+}
+
+bool Wallet::deposit(const Currency& deposit)
+{
+	if (contains(deposit.getType()))
+	{
+		*currency[deposit.getType()] += deposit;
+		return true;
+	}
+	else
+	{
+		switch (deposit.getType())
 		{
-			delete currencies[i];
+		case USD:
+			currency[deposit.getType()] = new USDCurrency(deposit.getWholeValue(), deposit.getFractionalValue());
+			return true;
+
+		case GBP:
+			currency[deposit.getType()] = new GBPCurrency(deposit.getWholeValue(), deposit.getFractionalValue());
+			return true;
+
+		default:
+			return false;
 		}
 	}
 }
 
-bool Wallet::contains(CurrencyType type) const
+bool Wallet::remove(CurrencyType toRemove)
 {
-	return currencies[type] != nullptr;
-}
-
-
-void Wallet::deposit(Currency& deposit)
-{
-	if (contains(deposit.getType()))
+	if (contains(toRemove))
 	{
-		*currencies[deposit.getType()] += deposit;
-	}
-	else
-	{
-		// TODO: need to fix this, depositing should create a new object;
-		// but it doesn't
-		Currency *newCurrency = new Currency(&deposit);
-		currencies[deposit.getType()] = &deposit;
-	}
-}
-/*
-bool Wallet::remove(CurrencyType type)
-{
-	int toRemoveIndex = contains(type);
-	if (toRemoveIndex >= 0)
-	{
-		Currency *toRemove = currencies[toRemoveIndex];
-		// Swap the last element with the element that needs to be removed
-		currencies[toRemoveIndex] = currencies[currencyCount - 1];
-		currencies[currencyCount - 1] = toRemove;
-		// Delete the last element, which should be the element to be removed (after the swap)
-		delete currencies[currencyCount - 1];
-		currencies[currencyCount - 1] = nullptr;
-		currencyCount--;
+		delete currency[toRemove];
+		currency[toRemove] = nullptr;
 		return true;
 	}
 	else
@@ -62,19 +63,21 @@ bool Wallet::remove(CurrencyType type)
 	}
 }
 
-Currency Wallet::withdraw(CurrencyType type, int withdrawMain, int withdrawSub)
+
+Currency& Wallet::withdraw(const Currency& withdrawal)
 {
+	if (contains(withdrawal))
 	int withdrawIndex = contains(type);
 	if (withdrawIndex >= 0)
 	{
 		switch (type)
 		{
 		case USD:
-			*currencies[withdrawIndex] -= USDCurrency(withdrawMain, withdrawSub);
+			*currency[withdrawIndex] -= USDCurrency(withdrawMain, withdrawSub);
 			return USDCurrency(withdrawMain, withdrawSub);
 
 		case GBP:
-			*currencies[withdrawIndex] -= GBPCurrency(withdrawMain, withdrawSub);
+			*currency[withdrawIndex] -= GBPCurrency(withdrawMain, withdrawSub);
 			return GBPCurrency(withdrawMain, withdrawSub);
 
 		default:
@@ -86,13 +89,36 @@ Currency Wallet::withdraw(CurrencyType type, int withdrawMain, int withdrawSub)
 		throw "no currency in wallet of type " + type;
 	}
 }
+/**/
 
-void Wallet::printBalanceTo(ostream &out) const
+
+void Wallet::printBalanceTo(std::ostream &outStream)
 {
-	for (int i = 0; i < currencyCount; i++)
+	for (int i = 0; i < MAX_WALLET_SIZE; i++)
 	{
-		out << *currencies[i] << currencies[i]->getName() << endl;
+		if (currency[i] != nullptr)
+		{
+			outStream 
+				<< currency[i]->getWholeValue()
+				<< '.'
+				<< currency[i]->getFractionalValue()
+				<< ' '
+				<< currency[i]->getWholeName() << endl;
+		}
 	}
 }
 
 /**/
+
+//
+//ostream& operator<< (ostream& outStream, const Wallet& wallet)
+//{
+//	for (int i = 0; i < MAX_WALLET_SIZE; i++)
+//	{
+//		if (wallet.currency[i] != nullptr)
+//		{
+//			outStream << *(wallet.currency[i]) << std::endl;
+//		}
+//	}
+//	return outStream;
+//}
