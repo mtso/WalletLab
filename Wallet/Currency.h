@@ -19,13 +19,13 @@ protected:
 	virtual Currency& normalized(int& wholeValue, int& fractionalValue);
 
 public:
-	/*
-	  Constructor
-	  Parameters:
-	  - string main unit's name
-	  - string subunit name
-	  - int main unit's value
-	  - int subunit's value
+	/**
+	 * Constructor
+	 * Parameters:
+	 * - string main unit's name
+	 * - string subunit name
+	 * - int main unit's value
+	 * - int subunit's value
 	 */
 	Currency(CurrencyType type, string wholeName, string fractionalName, int initialWhole, int initialFractional);
 	Currency(const Currency& source);
@@ -45,6 +45,8 @@ public:
 	virtual string getFractionalName() const { return fractionalName; }
 
 	CurrencyType getType() const { return type; }
+
+	virtual Currency* clone() const = 0;
 };
 
 #endif

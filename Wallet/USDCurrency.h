@@ -24,7 +24,7 @@ public:
 	friend USDCurrency& operator+ (USDCurrency& left, const USDCurrency& right);
 	friend USDCurrency& operator- (USDCurrency& left, const USDCurrency& right);
 
-
+	Currency* clone() const;
 };
 
 #endif

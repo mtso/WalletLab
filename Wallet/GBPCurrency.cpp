@@ -46,3 +46,8 @@ GBPCurrency& operator- (GBPCurrency& left, const GBPCurrency& right)
 	left -= right;
 	return left;
 }
+
+Currency* GBPCurrency::clone() const
+{
+	return new GBPCurrency(*this);
+}

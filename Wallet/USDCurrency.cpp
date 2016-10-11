@@ -70,3 +70,8 @@ USDCurrency& operator- (USDCurrency& left, const USDCurrency& right)
 	left -= right;
 	return left;
 }
+
+Currency* USDCurrency::clone() const
+{
+	return new USDCurrency(*this);
+}

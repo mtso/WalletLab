@@ -33,7 +33,8 @@ bool Wallet::deposit(const Currency& deposit)
 	}
 	else
 	{
-		switch (deposit.getType())
+		currency[deposit.getType()] = deposit.clone();
+		/*switch (deposit.getType())
 		{
 		case USD:
 			currency[deposit.getType()] = new USDCurrency(deposit.getWholeValue(), deposit.getFractionalValue());
@@ -45,7 +46,7 @@ bool Wallet::deposit(const Currency& deposit)
 
 		default:
 			return false;
-		}
+		}*/
 	}
 }
 
