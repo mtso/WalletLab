@@ -48,7 +48,7 @@ public:
 	/**
 	 * Withdraws a currency
 	 */
-	Currency& withdraw(const Currency& withdrawal);
+	Currency& withdraw(Currency& withdrawal);
 
 	/*
 	bool isEmpty() const;

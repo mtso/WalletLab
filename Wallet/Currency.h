@@ -37,6 +37,7 @@ public:
 	virtual Currency& operator+= (const Currency& right);
 	virtual Currency& operator-= (const Currency& right);
 
+	// TODO: Need to implement these operators
 	friend ostream& operator<< (ostream& outStream, const Currency& right);
 	friend istream& operator>> (istream& inStream, Currency& right);
 

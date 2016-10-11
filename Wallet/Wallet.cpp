@@ -63,34 +63,27 @@ bool Wallet::remove(CurrencyType toRemove)
 	}
 }
 
-
-Currency& Wallet::withdraw(const Currency& withdrawal)
+Currency& Wallet::withdraw(Currency& withdrawal)
 {
-	if (contains(withdrawal))
-	int withdrawIndex = contains(type);
-	if (withdrawIndex >= 0)
+	const CurrencyType toWithdraw = withdrawal.getType();
+	if (contains(toWithdraw))
 	{
-		switch (type)
+		try
 		{
-		case USD:
-			*currency[withdrawIndex] -= USDCurrency(withdrawMain, withdrawSub);
-			return USDCurrency(withdrawMain, withdrawSub);
-
-		case GBP:
-			*currency[withdrawIndex] -= GBPCurrency(withdrawMain, withdrawSub);
-			return GBPCurrency(withdrawMain, withdrawSub);
-
-		default:
-			throw "no currency to withdraw of type " + type;
+			*currency[toWithdraw] -= withdrawal;
+			return withdrawal;
+		}
+		catch (char* error)
+		{
+			cout << error << endl;
 		}
 	}
 	else
 	{
-		throw "no currency in wallet of type " + type;
+		cout << "no currency of that type to withdraw" << endl;
 	}
+	return withdrawal -= withdrawal;
 }
-/**/
-
 
 void Wallet::printBalanceTo(std::ostream &outStream)
 {
@@ -107,8 +100,6 @@ void Wallet::printBalanceTo(std::ostream &outStream)
 		}
 	}
 }
-
-/**/
 
 //
 //ostream& operator<< (ostream& outStream, const Wallet& wallet)
