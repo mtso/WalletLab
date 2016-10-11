@@ -12,16 +12,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Accountable.h" />
+    <ClInclude Include="AUDCurrency.h" />
+    <ClInclude Include="CHFCurrency.h" />
     <ClInclude Include="Currency.h" />
+    <ClInclude Include="CurrencyBase.h" />
     <ClInclude Include="CurrencyType.h" />
     <ClInclude Include="GBPCurrency.h" />
+    <ClInclude Include="JPYCurrency.h" />
     <ClInclude Include="USDCurrency.h" />
     <ClInclude Include="Wallet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Accountable.cpp" />
+    <ClCompile Include="AUDCurrency.cpp" />
+    <ClCompile Include="CHFCurrency.cpp" />
     <ClCompile Include="Currency.cpp" />
     <ClCompile Include="GBPCurrency.cpp" />
+    <ClCompile Include="JPYCurrency.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="USDCurrency.cpp" />
     <ClCompile Include="Wallet.cpp" />

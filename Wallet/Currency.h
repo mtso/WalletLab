@@ -16,7 +16,7 @@ protected:
 	string fractionalName;
 	CurrencyType type;
 
-	virtual Currency& normalized(int& wholeValue, int& fractionalValue);
+	virtual Accountable& normalized(int& wholeValue, int& fractionalValue);
 
 public:
 	/**
@@ -37,7 +37,11 @@ public:
 	virtual Currency& operator+= (const Currency& right);
 	virtual Currency& operator-= (const Currency& right);
 
-	// TODO: Need to implement these operators
+	/**
+	 * Allows the currency object to print its name and value to an ostream object.
+	 * @param ostream object
+	 * @param right-hand side currency object
+	 */
 	friend ostream& operator<< (ostream& outStream, const Currency& right);
 	friend istream& operator>> (istream& inStream, Currency& right);
 
@@ -47,6 +51,11 @@ public:
 	CurrencyType getType() const { return type; }
 
 	virtual Currency* clone() const = 0;
+
+
+	friend Currency& operator+ (Currency& left, const Currency& right);
+	friend Currency& operator- (Currency& left, const Currency& right);
+
 };
 
 #endif

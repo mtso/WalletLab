@@ -1,6 +1,11 @@
 
 #include "Accountable.h"
 
+Accountable& Accountable::normalized(int& wholeValue, int& fractionalValue)
+{
+	throw "normalized has not been implemented";
+}
+
 Accountable::Accountable(const int wholeInput, const int fractionalInput)
 {
 	wholeValue = wholeInput;
@@ -15,9 +20,9 @@ Accountable& Accountable::operator= (const Accountable& right)
 {
 	if (this != &right)
 	{
-		return Accountable(right);
-		//wholeValue = right.getWholeValue();
-		//fractionalValue = right.getFractionalValue();
+		//return Accountable(right);
+		wholeValue = right.getWholeValue();
+		fractionalValue = right.getFractionalValue();
 	}
 	return *this;
 }
@@ -26,14 +31,14 @@ Accountable& Accountable::operator+= (const Accountable& right)
 {
 	wholeValue += right.getWholeValue();
 	fractionalValue += right.getFractionalValue();
-	return *this;
+	return normalized(wholeValue, fractionalValue);
 }
 
 Accountable& Accountable::operator-= (const Accountable& right)
 {
 	wholeValue -= right.getWholeValue();
 	fractionalValue -= right.getFractionalValue();
-	return *this;
+	return normalized(wholeValue, fractionalValue);
 }
 
 bool Accountable::operator> (const Accountable& right)

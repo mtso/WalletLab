@@ -1,10 +1,15 @@
 
 #include "Currency.h"
 
-Currency& Currency::normalized(int& wholeValue, int& fractionalValue)
+Accountable& Currency::normalized(int& wholeValue, int& fractionalValue)
 {
 	throw "normalized has not been implemented";
 }
+
+//Currency& Currency::normalized(int& wholeValue, int& fractionalValue)
+//{
+//	throw "normalized has not been implemented";
+//}
 
 Currency::Currency(CurrencyType type, string wholeName, string fracName, int initialMain, int initialFractional)
 : type(type), wholeName(wholeName), fractionalName(fracName), Accountable(initialMain, initialFractional)
@@ -21,7 +26,7 @@ Currency& Currency::operator= (const Currency& right)
 
 	if (this != &right)
 	{
-		Accountable::operator= (right);
+		//Accountable::operator= (right);
 
 		wholeName = right.getWholeName();
 		fractionalName = right.getFractionalName();
@@ -34,8 +39,10 @@ Currency& Currency::operator+= (const Currency& right)
 {
 	if (type != right.getType()) { throw "operator+= attempt on incompatible types"; }
 
+	//return *this += right;
 	Accountable::operator+=(right);
-	return normalized(wholeValue, fractionalValue);
+	return *this;
+	//return normalized(wholeValue, fractionalValue);
 }
 
 
@@ -44,9 +51,26 @@ Currency& Currency::operator-= (const Currency& right)
 	if (type != right.getType()) { throw "operator-= attempt on incompatible types"; }
 	if (*this < right) { throw "operator-= attempt on insufficient balance"; }
 
+	//return *this -= right;
 	Accountable::operator-=(right);
-	return normalized(wholeValue, fractionalValue);
+	return *this;
+	//return normalized(wholeValue, fractionalValue);
 }
 
-ostream& operator<< (ostream& outStream, const Currency& right);
-//friend istream& operator>> (istream& inStream, Currency& right);
+ostream& operator<< (ostream& outStream, const Currency& right)
+{
+	outStream
+		<< right.getWholeValue()
+		<< ' ' << right.getWholeName() << " and "
+		<< right.getFractionalValue()
+		<< ' ' << right.getFractionalName();
+	return outStream;
+}
+
+istream& operator>> (istream& inStream, Currency& right)
+{
+	inStream >> right.wholeValue;
+	inStream >> right.fractionalValue;
+	right.normalized(right.wholeValue, right.fractionalValue);
+	return inStream;
+}

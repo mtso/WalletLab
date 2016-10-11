@@ -16,9 +16,6 @@ Currency& GBPCurrency::normalized(int& wholeValue, int& fractionalValue)
 	return *this;
 }
 
-GBPCurrency::GBPCurrency() : Currency(GBP, "pounds", "pence", 0, 0)
-{}
-
 GBPCurrency::GBPCurrency(int initialWhole, int initialFractional)
 : Currency(GBP, "pounds", "pence", initialWhole, initialFractional)
 {
@@ -27,6 +24,8 @@ GBPCurrency::GBPCurrency(int initialWhole, int initialFractional)
 
 GBPCurrency::GBPCurrency(const GBPCurrency& source) : Currency(source)
 {
+	wholeName = source.getWholeName();
+	fractionalName = source.getFractionalName();
 }
 
 GBPCurrency& GBPCurrency::operator= (const GBPCurrency& right)

@@ -14,9 +14,7 @@ Wallet::~Wallet()
 	for (int i = 0; i < MAX_WALLET_SIZE; i++)
 	{
 		delete currency[i];
-		//currency[i] = nullptr;
 	}
-	//delete[] currency;
 }
 
 bool Wallet::contains(CurrencyType ofType) const
@@ -24,17 +22,15 @@ bool Wallet::contains(CurrencyType ofType) const
 	return currency[ofType] != nullptr;
 }
 
-bool Wallet::deposit(const Currency& deposit)
+void Wallet::deposit(const Currency& deposit)
 {
 	if (contains(deposit.getType()))
 	{
 		*currency[deposit.getType()] += deposit;
-		return true;
 	}
 	else
 	{
 		currency[deposit.getType()] = deposit.clone();
-		return true;
 	}
 }
 
@@ -49,6 +45,14 @@ bool Wallet::remove(CurrencyType toRemove)
 	else
 	{
 		return false;
+	}
+}
+
+void Wallet::removeAll()
+{
+	for (int i = USD; i != AUD; i++)
+	{
+		remove(static_cast<CurrencyType>(i));
 	}
 }
 
@@ -86,31 +90,14 @@ bool Wallet::isEmpty() const
 	return true;
 }
 
-void Wallet::printBalanceTo(std::ostream &outStream)
+ostream& operator<< (ostream& outStream, const Wallet& wallet)
 {
 	for (int i = 0; i < MAX_WALLET_SIZE; i++)
 	{
-		if (currency[i] != nullptr)
+		if (wallet.currency[i] != nullptr)
 		{
-			outStream 
-				<< currency[i]->getWholeValue()
-				<< '.'
-				<< currency[i]->getFractionalValue()
-				<< ' '
-				<< currency[i]->getWholeName() << endl;
+			outStream << *(wallet.currency[i]) << endl;
 		}
 	}
+	return outStream;
 }
-
-//
-//ostream& operator<< (ostream& outStream, const Wallet& wallet)
-//{
-//	for (int i = 0; i < MAX_WALLET_SIZE; i++)
-//	{
-//		if (wallet.currency[i] != nullptr)
-//		{
-//			outStream << *(wallet.currency[i]) << std::endl;
-//		}
-//	}
-//	return outStream;
-//}

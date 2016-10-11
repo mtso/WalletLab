@@ -6,6 +6,9 @@
 
 #include "USDCurrency.h"
 #include "GBPCurrency.h"
+#include "JPYCurrency.h"
+#include "CHFCurrency.h"
+#include "AUDCurrency.h"
 
 using namespace std;
 
@@ -37,7 +40,7 @@ public:
 	 * Adds a currency value into the wallet or creates a new currency object if one does not exist.
 	 * @param deposit The Currency object to deposit.
 	 */
-	bool deposit(const Currency& deposit);
+	void deposit(const Currency& deposit);
 
 	/**
 	 * Removes a currency of a certain type
@@ -46,9 +49,14 @@ public:
 	bool remove(CurrencyType toRemove);
 
 	/**
+	 * Removes all currencies from wallet
+	 */
+	void removeAll();
+
+	/**
 	 * Withdraws a currency
 	 * @returns the withdrawal amount if successful or 
-	 * a zero-value withdrawal object if there was an insufficient balance
+	 *	a zero-value withdrawal object if there was an insufficient balance
 	 */
 	Currency& withdraw(Currency& withdrawal);
 
@@ -57,14 +65,8 @@ public:
 	 * @returns true if the whole array points to nullptr
 	 */
 	bool isEmpty() const;
-
-	/**/
-
-	void printBalanceTo(std::ostream& out);
 	
-	//friend ostream& operator<< (ostream& outStream, const Wallet& wallet);
-
-	/**/
+	friend ostream& operator<< (ostream& outStream, const Wallet& wallet);
 };
 
 #endif

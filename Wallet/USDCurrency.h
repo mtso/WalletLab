@@ -3,26 +3,21 @@
 #define USDCURRENCY_H
 
 #include "Currency.h"
+#include "CurrencyBase.h"
 
 class USDCurrency : public Currency {
 private:
-	const Base base = base100;
+	const CurrencyBase base = BASE_100;
 
-	virtual Currency& normalized(int& wholeValue, int& fractionalValue);
+	virtual Accountable& normalized(int& wholeValue, int& fractionalValue);
 
 public:
-	USDCurrency();
-	USDCurrency(int initialWhole, int initialFractional);
+	//USDCurrency();
+	USDCurrency(int initialWhole = 0, int initialFractional = 0);
 	USDCurrency(const USDCurrency& source);
-	~USDCurrency() { std::cout << "USD destructor" << std::endl; }
+	~USDCurrency() { }
 
 	virtual USDCurrency& operator= (const USDCurrency& right);
-
-	//virtual Accountable& operator+= (const Accountable& right);
-	//virtual Accountable& operator-= (const Accountable& right);
-	
-	friend USDCurrency& operator+ (USDCurrency& left, const USDCurrency& right);
-	friend USDCurrency& operator- (USDCurrency& left, const USDCurrency& right);
 
 	Currency* clone() const;
 };

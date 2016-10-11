@@ -1,7 +1,7 @@
 
 #include "USDCurrency.h"
 
-Currency& USDCurrency::normalized(int& wholeValue, int& fractionalValue)
+Accountable& USDCurrency::normalized(int& wholeValue, int& fractionalValue)
 {
 	if (fractionalValue >= base)
 	{
@@ -16,10 +16,6 @@ Currency& USDCurrency::normalized(int& wholeValue, int& fractionalValue)
 	return *this;
 }
 
-USDCurrency::USDCurrency() : Currency(USD, "dollars", "cents", 0, 0)
-{
-}
-
 USDCurrency::USDCurrency(int initialWhole, int initialFractional) 
 : Currency(USD, "dollars", "cents", initialWhole, initialFractional)
 {
@@ -28,6 +24,8 @@ USDCurrency::USDCurrency(int initialWhole, int initialFractional)
 
 USDCurrency::USDCurrency(const USDCurrency& source) : Currency(source)
 {
+	wholeName = source.getWholeName();
+	fractionalName = source.getFractionalName();
 }
 
 USDCurrency& USDCurrency::operator= (const USDCurrency& right)
@@ -38,29 +36,6 @@ USDCurrency& USDCurrency::operator= (const USDCurrency& right)
 	}
 	return *this;
 }
-
-//Accountable& USDCurrency::operator+= (const Accountable& right)
-//{
-//	//*this += right;
-//	wholeValue += right.getWholeValue();
-//	fractionalValue += right.getFractionalValue();
-//	return normalized(wholeValue, fractionalValue);
-//}
-//
-//Accountable& USDCurrency::operator-= (const Accountable& right)
-//{
-//	if (*this > right)
-//	{
-//		//*this -= right;
-//		wholeValue -= right.getWholeValue();
-//		fractionalValue -= right.getFractionalValue();
-//		return normalized(wholeValue, fractionalValue);
-//	}
-//	else
-//	{
-//		throw "Subtraction operation attempt on an insufficient balance";
-//	}
-//}
 
 USDCurrency& operator+ (USDCurrency& left, const USDCurrency& right)
 {
