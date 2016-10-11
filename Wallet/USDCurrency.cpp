@@ -32,7 +32,10 @@ USDCurrency::USDCurrency(const USDCurrency& source) : Currency(source)
 
 USDCurrency& USDCurrency::operator= (const USDCurrency& right)
 {
-	Currency::operator= (right);
+	if (this != &right)
+	{
+		Currency::operator= (right);
+	}
 	return *this;
 }
 

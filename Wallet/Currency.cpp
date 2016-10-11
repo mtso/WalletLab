@@ -15,9 +15,14 @@ Currency::Currency(const Currency& source) : type(source.getType()), Accountable
 {
 }
 
-Currency& Currency::operator= (const Currency& right)
+Currency& Currency::operator= (const Currency& right) 
 {
-	Accountable::operator= (right);
+	if (type != right.getType()) { throw "operator+= attempt on incompatible types"; }
+
+	if (this != &right)
+	{
+		Accountable::operator= (right);
+	}
 	return *this;
 }
 
@@ -38,3 +43,6 @@ Currency& Currency::operator-= (const Currency& right)
 	Accountable::operator-=(right);
 	return normalized(wholeValue, fractionalValue);
 }
+
+ostream& operator<< (ostream& outStream, const Currency& right);
+//friend istream& operator>> (istream& inStream, Currency& right);

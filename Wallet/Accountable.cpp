@@ -13,7 +13,11 @@ Accountable::Accountable(const Accountable &source) : wholeValue(source.getWhole
 
 Accountable& Accountable::operator= (const Accountable& right)
 {
-	*this = right;
+	if (this != &right)
+	{
+		wholeValue = right.getWholeValue();
+		fractionalValue = right.getFractionalValue();
+	}
 	return *this;
 }
 
