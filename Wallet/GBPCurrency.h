@@ -17,6 +17,9 @@ public:
 
 	virtual GBPCurrency& operator= (const GBPCurrency& right);
 
+	friend GBPCurrency& operator+ (GBPCurrency& left, const GBPCurrency& right);
+	friend GBPCurrency& operator- (GBPCurrency& left, const GBPCurrency& right);
+
 	Currency* clone() const;
 };
 

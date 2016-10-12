@@ -21,6 +21,9 @@ public:
 
 	virtual JPYCurrency& operator= (const JPYCurrency& right);
 
+	friend JPYCurrency& operator+ (JPYCurrency& left, const JPYCurrency& right);
+	friend JPYCurrency& operator- (JPYCurrency& left, const JPYCurrency& right);
+
 	Currency* clone() const;
 };
 
