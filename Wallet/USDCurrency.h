@@ -5,6 +5,9 @@
 #include "Currency.h"
 #include "CurrencyBase.h"
 
+/**
+ * USD specific currency that defines its own base number.
+ */
 class USDCurrency : public Currency {
 private:
 	const CurrencyBase base = BASE_100;

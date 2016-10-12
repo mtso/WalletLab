@@ -6,11 +6,6 @@ Accountable& Currency::normalized(int& wholeValue, int& fractionalValue)
 	throw "normalized has not been implemented";
 }
 
-//Currency& Currency::normalized(int& wholeValue, int& fractionalValue)
-//{
-//	throw "normalized has not been implemented";
-//}
-
 Currency::Currency(CurrencyType type, string wholeName, string fracName, int initialMain, int initialFractional)
 : type(type), wholeName(wholeName), fractionalName(fracName), Accountable(initialMain, initialFractional)
 {
@@ -26,8 +21,6 @@ Currency& Currency::operator= (const Currency& right)
 
 	if (this != &right)
 	{
-		//Accountable::operator= (right);
-
 		wholeName = right.getWholeName();
 		fractionalName = right.getFractionalName();
 		type = right.getType();
@@ -39,10 +32,8 @@ Currency& Currency::operator+= (const Currency& right)
 {
 	if (type != right.getType()) { throw "operator+= attempt on incompatible types"; }
 
-	//return *this += right;
 	Accountable::operator+=(right);
 	return *this;
-	//return normalized(wholeValue, fractionalValue);
 }
 
 
@@ -51,10 +42,8 @@ Currency& Currency::operator-= (const Currency& right)
 	if (type != right.getType()) { throw "operator-= attempt on incompatible types"; }
 	if (*this < right) { throw "operator-= attempt on insufficient balance"; }
 
-	//return *this -= right;
 	Accountable::operator-=(right);
 	return *this;
-	//return normalized(wholeValue, fractionalValue);
 }
 
 ostream& operator<< (ostream& outStream, const Currency& right)

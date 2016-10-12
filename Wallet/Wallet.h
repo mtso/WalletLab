@@ -14,6 +14,10 @@ using namespace std;
 
 const int MAX_WALLET_SIZE = AUD + 1;
 
+/**
+ * Wallet manages an array of 5 currency accounts
+ * and provides methods to help the user manipulate the account balances.
+ */
 class Wallet
 {
 private:
@@ -66,6 +70,9 @@ public:
 	 */
 	bool isEmpty() const;
 	
+	/**
+	 * Ostream operation prints the wallet balances to an ostream.
+	 */
 	friend ostream& operator<< (ostream& outStream, const Wallet& wallet);
 };
 

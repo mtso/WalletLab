@@ -32,28 +32,7 @@ void Wallet::deposit(const Currency& deposit)
 	{
 		currency[deposit.getType()] = deposit.clone();
 	}
-}
-
-bool Wallet::remove(CurrencyType toRemove)
-{
-	if (contains(toRemove))
-	{
-		delete currency[toRemove];
-		currency[toRemove] = nullptr;
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-void Wallet::removeAll()
-{
-	for (int i = USD; i != AUD; i++)
-	{
-		remove(static_cast<CurrencyType>(i));
-	}
+	cout << "Deposited " << deposit << endl;
 }
 
 Currency& Wallet::withdraw(Currency& withdrawal)
@@ -64,11 +43,12 @@ Currency& Wallet::withdraw(Currency& withdrawal)
 		try
 		{
 			*currency[toWithdraw] -= withdrawal;
+			cout << "Withdrew  " << withdrawal << endl;
 			return withdrawal;
 		}
-		catch (char* error)
+		catch (...)
 		{
-			cout << error << endl;
+			cout << "Insufficient balance of " << withdrawal.getWholeName() << endl;
 		}
 	}
 	else
@@ -76,6 +56,30 @@ Currency& Wallet::withdraw(Currency& withdrawal)
 		cout << "no currency of that type to withdraw" << endl;
 	}
 	return withdrawal -= withdrawal;
+}
+
+bool Wallet::remove(CurrencyType toRemove)
+{
+	if (contains(toRemove))
+	{
+		delete currency[toRemove];
+		currency[toRemove] = nullptr;
+		cout << "Removed a currency at position " << toRemove << endl;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void Wallet::removeAll()
+{
+	for (int i = USD; i < AUD + 1; i++)
+	{
+		remove(static_cast<CurrencyType>(i));
+	}
+	cout << "Wallet is now empty." << endl;
 }
 
 bool Wallet::isEmpty() const

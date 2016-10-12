@@ -5,6 +5,9 @@
 #include "Currency.h"
 #include "CurrencyBase.h"
 
+/**
+ * JPY specific currency that defines its own base number (only currency to have a base of 1000).
+ */
 class JPYCurrency : public Currency {
 private:
 	const CurrencyBase base = BASE_1000;

@@ -12,7 +12,6 @@ private:
 	virtual Accountable& normalized(int& wholeValue, int& fractionalValue);
 
 public:
-	//AUDCurrency();
 	AUDCurrency(int initialWhole = 0, int initialFractional = 0);
 	AUDCurrency(const AUDCurrency& source);
 	~AUDCurrency() { }
