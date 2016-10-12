@@ -17,6 +17,9 @@ public:
 	~AUDCurrency() { }
 
 	virtual AUDCurrency& operator= (const AUDCurrency& right);
+	
+	friend AUDCurrency& operator+ (AUDCurrency& left, const AUDCurrency& right);
+	friend AUDCurrency& operator- (AUDCurrency& left, const AUDCurrency& right);
 
 	Currency* clone() const;
 };

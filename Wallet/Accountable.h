@@ -3,9 +3,7 @@
  * Provides a base class for monetary accounting objects
  * Must have a main value
  * Must have a subunit value
- * Must have a subunit base for calculating subunit overflows
  */
-
 
 #ifndef ACCOUNTABLE_H
 #define ACCOUNTABLE_H
@@ -20,19 +18,34 @@ protected:
 	int wholeValue;
 	int fractionalValue;
 
-	// Increments whole value if fractional overflowed or 
-	// decrements whole value if fractional underflowed;
-	// then returns self object
+	/** 
+	 * Increments whole value if fractional overflowed or 
+	 * decrements whole value if fractional underflowed;
+	 * then returns self object
+	 * @param wholeValue by reference
+	 * @param fractionalValue by reference
+	 */
 	virtual Accountable& normalized(int& wholeValue, int& fractionalValue);
 
 public:
-	// Initialize with base, main, and subunit value
+	/**
+	 * Initialize with initial values for the whole and fractional parts.
+	 */
 	Accountable(const int initialWhole, const int initialFractional);
-	// Copy constructor
+	
+	/**
+	 * Copy constructor
+	 */
 	Accountable(const Accountable& source);
+	
+	/**
+	 * Virtual destructor
+	 */
 	virtual ~Accountable() {}
 
-	// Copy assignment constructor
+	/**
+	 * Assignment operator
+	 */
 	virtual Accountable& operator= (const Accountable&);
 
 	/**

@@ -38,7 +38,9 @@ public:
 	 */
 	virtual ~Currency() {}
 
-	// Copy assignment constructor
+	/**
+	 * assignment constructor
+	 */
 	virtual Currency& operator= (const Currency& right);
 
 	/**

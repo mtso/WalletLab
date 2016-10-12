@@ -15,12 +15,14 @@ private:
 	virtual Accountable& normalized(int& wholeValue, int& fractionalValue);
 
 public:
-	//USDCurrency();
 	USDCurrency(int initialWhole = 0, int initialFractional = 0);
 	USDCurrency(const USDCurrency& source);
 	~USDCurrency() { }
 
 	virtual USDCurrency& operator= (const USDCurrency& right);
+
+	friend USDCurrency& operator+ (USDCurrency& left, const USDCurrency& right);
+	friend USDCurrency& operator- (USDCurrency& left, const USDCurrency& right);
 
 	Currency* clone() const;
 };

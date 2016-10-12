@@ -18,6 +18,9 @@ public:
 
 	virtual CHFCurrency& operator= (const CHFCurrency& right);
 
+	friend CHFCurrency& operator+ (CHFCurrency& left, const CHFCurrency& right);
+	friend CHFCurrency& operator- (CHFCurrency& left, const CHFCurrency& right);
+
 	Currency* clone() const;
 };
 
